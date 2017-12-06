@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
+//change to camelcase
 
 const travelSchema = mongoose.Schema({
-  Money_you_want_to_spend: { type: Number, required: true },
-  maximum_amount: { type: Number},
+  budget: { type: Number, required: true },
+  startTravelDate: { type: Date},
+  endTravelDate: { type: Date},
   country: { type: String, required: true },
-  allowance_per_hotels: { type: Number },
-  allowance_for_food: { type: Number},
+  hotelCost: { type: Number },
+  foodCost: { type: Number},
   extra: { type: Number},
-  travel_fare: {type: Number},
-  transportation: { type: Number, required: true},
-  extra_money_for_set_week: { type: Number}
-
+  travelCost: {type: Number},
+  transportation: { type: Number, required: true }
+}, {
+  timestamps: true
 });
 
 module.exports = mongoose.model('travel', travelSchema);

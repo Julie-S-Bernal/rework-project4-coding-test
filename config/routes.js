@@ -13,6 +13,7 @@ router.route('/travels/:id')
   .put(travels.update)
   .delete(travels.delete);
 
+
 router.route('/register')
   .post(auth.register);
 

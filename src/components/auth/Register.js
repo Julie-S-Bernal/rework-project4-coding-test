@@ -8,13 +8,13 @@ import Auth from '../../lib/Auth';
 class Register extends React.Component {
   state = {
     user: {
-      Name: '',
-      Surname: '',
-      Email: '',
-      Country_of_Residence: '',
-      Default_currency: '',
+      name: '',
+      surname: '',
+      email: '',
+      // Country_of_Residence: '',
+      // Default_currency: '',
       password: '',
-      Password_confirmation: ''
+      PasswordConfirmation: ''
     }
   };
   handleChange = ({ target: { name, value }}) => {

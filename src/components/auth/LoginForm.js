@@ -6,8 +6,8 @@ const LoginForm = ({ handleChange, handleSubmit, user }) => {
       <div className="form-group">
         <input
           type="text"
-          name="Name"
-          placeholder="Name"
+          name="name"
+          placeholder="name"
           onChange={handleChange}
           value={user.name}
           className="form-control"
@@ -16,8 +16,8 @@ const LoginForm = ({ handleChange, handleSubmit, user }) => {
       <div className="form-group">
         <input
           type="text"
-          name="Surname"
-          placeholder="Surname"
+          name="surname"
+          placeholder="surname"
           onChange={handleChange}
           value={user.surname}
           className="form-control"
@@ -26,8 +26,8 @@ const LoginForm = ({ handleChange, handleSubmit, user }) => {
       <div className="form-group">
         <input
           type="text"
-          name="Email"
-          placeholder="Email"
+          name="email"
+          placeholder="email"
           onChange={handleChange}
           value={user.email}
           className="form-control"

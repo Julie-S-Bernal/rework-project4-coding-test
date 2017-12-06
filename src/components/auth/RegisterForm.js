@@ -6,8 +6,8 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
       <div className="form-group">
         <input
           type="text"
-          name="Name"
-          placeholder="Name"
+          name="name"
+          placeholder="name"
           onChange={handleChange}
           value={user.name}
           className="form-control"
@@ -16,7 +16,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
       <div className="form-group">
         <input
           type="text"
-          name="Surname"
+          name="surname"
           placeholder="Surname"
           onChange={handleChange}
           value={user.surname}
@@ -26,14 +26,14 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
       <div className="form-group">
         <input
           type="text"
-          name="Email"
+          name="email"
           placeholder="Email"
           onChange={handleChange}
           value={user.email}
           className="form-control"
         />
       </div>
-      <div className="form-group">
+      {/* <div className="form-group">
         <input
           type="text"
           name="Country of residence"
@@ -52,7 +52,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
           value={user.default_currency}
           className="form-control"
         />
-      </div>
+      </div> */}
       <div className="form-group">
         <input
           type="password"
