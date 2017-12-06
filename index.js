@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const routes = require('./config/routes');
 
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
@@ -20,6 +21,8 @@ app.use(bodyParser.json());
 
 app.use(customResponses);
 
+
+app.use('/api', routes);
 app.get('/*', (req, res) => res.sendFile(`${__dirname}/public/index.html`));
 
 app.use(errorHandler);
