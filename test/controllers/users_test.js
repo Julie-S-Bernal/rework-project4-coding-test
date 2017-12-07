@@ -8,8 +8,7 @@ const User = require('../../models/user');
 
 
 const userData = [{
-  name: 'test',
-  surname: 'test',
+
   email: 'test@test.com',
   password: 'test'
 
@@ -70,27 +69,29 @@ describe('POST /api/register', () => {
 
 
 const travel = [{
-  budget: 5000,
-  startTravelDate: new Date(),
-  endTravelDate: new Date(),
-  country: 'Japan',
-  hotelCost: 1500,
-  travelCost: 50,
-  extra: 500,
-  foodCost: 1500,
-  transportation: 0,
-  extra_money_for_set_week: 0
+  budget: '2000',
+  startTravelDate: '01-12-2017',
+  endTravelDate: '14-01-2017',
+  travelDuration: '5',
+  country: 'Norway',
+  currency: 'NOK',
+  hotelCost: '800',
+  foodCost: '500',
+  extra: '500',
+  travelCost: '1200',
+  transportation: '100'
 }, {
-  budget: 800,
-  startTravelDate: new Date(),
-  endTravelDate: new Date(),
-  country: 'France',
-  hotelCost: 200,
-  travelCost: 100,
-  extra: 200,
-  foodCost: 150,
-  transportation: 0,
-  extra_money_for_set_week: 0
+  budget: '7000',
+  startTravelDate: '01-12-2017',
+  endTravelDate: '15-03-2017',
+  travelDuration: '5',
+  country: 'Sweden',
+  currency: 'SEK',
+  hotelCost: '4000',
+  foodCost: '500',
+  extra: '500',
+  travelCost: '800',
+  transportation: '100'
 }];
 
 describe('POST /api/travels', () => {
@@ -156,6 +157,10 @@ describe('POST /api/travels', () => {
         expect(traveldetails.id).to.be.a('string');
         expect(traveldetails.budget).to.equal(travel[0].budget);
         expect(traveldetails.country).to.equal(travel[0].country);
+        expect(traveldetails.startTravelDate).to.equal(travel[0].startTravelDate);
+        expect(traveldetails.endTravelDate).to.equal(travel[0].endTravelDate);
+        expect(traveldetails.currency).to.equal(travel[0].curency);
+        expect(traveldetails.travelDuration).to.equal(travel[0].travelDuration);
         expect(traveldetails.hotelCost).to.equal(travel[0].hotelCost);
         expect(traveldetails.travelCost).to.equal(travel[0].travelCost);
         expect(traveldetails.extra).to.equal(travel[0].extra);

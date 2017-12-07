@@ -7,8 +7,6 @@ import Auth from '../../lib/Auth';
 class Login extends React.Component {
   state = {
     user: {
-      name: '',
-      surname: '',
       email: '',
       password: ''
     }

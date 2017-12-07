@@ -5,13 +5,13 @@ const userSchema = new mongoose.Schema({
   name: { type: String, trim: true, required: true },
   surname: { type: String, trim: true, required: true },
   email: { type: String, trim: true, required: true },
-  password: { type: String, trim: true, required: true }
-  // passwordConfirmation: { type: String, trim: true, required: true }
-  // Street_number: { type: Number, required: true },
-  // Address: { type: String, trim: true, required: true },
-  // Country_of_Residence: { type: Number, required: true },
-  // PhoneNumber: { type: Boolean, required: true },
-  // Default_currency: { type: Number, required: true }
+  password: { type: String, trim: true, required: true },
+  homeCountry: {type: String, trim: true, required: true},
+  homeCurrency: {type: String},
+  salary: {type: Number, trim: true, required: true},
+  monthlySalary: {type: Number, trim: true, required: true},
+  livingExpensesYear: {type: Number, trim: true, required: true },
+  livingExpensesMonth: {type: Number, trim: true, required: true }
 
 }, {
   timestamps: true

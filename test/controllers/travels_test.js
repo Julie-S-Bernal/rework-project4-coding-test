@@ -10,16 +10,18 @@ describe('Travels Controller Test', () => {
   beforeEach(done => {
     Travel.create({
 
-      budget: 5000,
+      budget: 5500,
       startTravelDate: new Date(),
       endTravelDate: new Date(),
+      travelDuration: 7,
       country: 'Japan',
-      hotelCost: 1500,
-      foodCost: 50,
+      currency: 'YEN',
+      hotelCost: 2000,
+      foodCost: 500,
       extra: 500,
-      travelCost: 1500,
-      transportation: 0,
-      extra_money_for_set_week: 0
+      travelCost: 1800,
+      transportation: 0
+
     })
       .then(() => done())
       .catch(done);
@@ -71,14 +73,19 @@ describe('Travels Controller Test', () => {
               'budget',
               'startTravelDate',
               'endTravelDate',
+              'travelDuration',
+              'startTravelDate',
+              'endTravelDate',
               'country',
               'hotelCost',
+              'currency',
               'foodCost',
               'extra',
               'travelCost',
               'createdAt',
               'transportation',
               'updatedAt'
+
             ]);
           done();
         });
@@ -108,6 +115,10 @@ describe('Travels Controller Test', () => {
 
           expect(oneTravel)
             .to.have.property('country')
+            .and.to.be.a('string');
+
+          expect(oneTravel)
+            .to.have.property('currency')
             .and.to.be.a('string');
 
           expect(oneTravel)
@@ -147,28 +158,30 @@ describe('Travels Controller Test', () => {
       beforeEach(done => {
         Travel.create([
           {
-            budget: 2000,
+            budget: 5500,
             startTravelDate: new Date(),
             endTravelDate: new Date(),
-            country: 'Italy',
-            hotelCost: 800,
-            foodCost: 300,
-            extra: 100,
-            travelCost: 500,
-            transportation: 100,
-            extra_money_for_set_week: 0
+            travelDuration: 7,
+            country: 'Japan',
+            currency: 'YEN',
+            hotelCost: 2000,
+            foodCost: 500,
+            extra: 500,
+            travelCost: 1800,
+            transportation: 0
           },
           {
             budget: 2000,
             startTravelDate: new Date(),
             endTravelDate: new Date(),
-            country: 'Italy',
+            travelDuration: 7,
+            country: 'France',
+            currency: 'EUR',
             hotelCost: 800,
             foodCost: 300,
             extra: 100,
             travelCost: 500,
-            transportation: 100,
-            extra_money_for_set_week: 0
+            transportation: 100
           }
         ])
           .then(() => done())
@@ -200,6 +213,7 @@ describe('Travels Controller Test', () => {
             endTravelDate: new Date(),
             country: 'Seattle',
             hotelCost: 1500,
+            currency: 'USD',
             foodCost: 300,
             extra: 100,
             travelCost: 500,
@@ -209,133 +223,82 @@ describe('Travels Controller Test', () => {
         })
         .expect(201, done);
     });
-  //
-  //   it('should create a travel', done => {
-  //     api
-  //       .post('/api/travels')
-  //       .set('Accept', 'application/json')
-  //       .send({
-  //         travel: {
-  //           budget: 4000,
-  //           startTravelDate: new Date(),
-  //           endTravelDate: new Date(),
-  //           country: 'Seattle',
-  //           hotelCost: 1500,
-  //           foodCost: 300,
-  //           extra: 100,
-  //           travelCost: 500,
-  //           transportation: 100,
-  //           extra_money_for_set_week: 0
-  //         }
-  //       })
-  //       .end((err, res) => {
-  //         const travel = res.body;
-  //
-  //         expect(travel)
-  //           .to.have.property('_id')
-  //           .and.to.be.a('string');
-  //
-  //         expect(travel)
-  //           .to.have.property('budget')
-  //           .and.to.be.a('number');
-  //
-  //         expect(travel)
-  //           .to.have.property('startTravelDate')
-  //           .and.to.be.a('string');
-  //
-  //         expect(travel)
-  //           .to.have.property('endTravelDate')
-  //           .and.to.be.a('string');
-  //
-  //         expect(travel)
-  //           .to.have.property('country')
-  //           .and.to.be.a('string');
-  //
-  //         expect(travel)
-  //           .to.have.property('hotelCost')
-  //           .and.to.be.a('number');
-  //
-  //         expect(travel)
-  //           .to.have.property('foodCost')
-  //           .and.to.be.a('number');
-  //
-  //         expect(travel)
-  //           .to.have.property('extra')
-  //           .and.to.be.a('number');
-  //
-  //         expect(travel)
-  //           .to.have.property('travelCost')
-  //           .and.to.be.a('number');
-  //
-  //         expect(travel)
-  //           .to.have.property('transportation')
-  //           .and.to.be.a('number');
-  //
-  //         expect(travel)
-  //           .to.have.property('createdAt')
-  //           .and.to.be.a('string');
-  //
-  //         expect(travel)
-  //           .to.have.property('updatedAt')
-  //           .and.to.be.a('string');
-  //
-  //
-  //         done();
-  //       });
-  //   });
-  //
-  // });
-//
-//   describe('GET /api/shoes/:id', () => {
-//
-//     let shoe;
-//
-//     beforeEach(done => {
-//       Shoe.create({
-//         brand: 'Nike',
-//         color: 'black',
-//         laced: true,
-//         material: 'leather',
-//         price: 49.99
-//       })
-//       .then(shoeData => {
-//         shoe = shoeData;
-//         done();
-//       })
-//       .catch(done);
-//     });
-//
-//     it('should return a 200 response', done => {
-//       api
-//         .get(`/api/shoes/${shoe.id}`)
-//         .set('Accept', 'application/json')
-//         .expect(200, done);
-//     });
-//   });
-//
-//   describe('DELETE /api/shoes/:id', () => {
-//
-//     let shoe;
-//
-//     beforeEach(done => {
-//       Shoe.create({
-//         brand: 'Nike',
-//         color: 'black',
-//         laced: true,
-//         material: 'leather',
-//         price: 49.99
-//       })
-//       .then(shoeData => {
-//         shoe = shoeData;
-//         done();
-//       })
-//       .catch(done);
-//     });
-//
-//     it('should return a 204 response', done => {
-//       api
-//         .delete(`/api/shoes/${shoe.id}`)
-//         .set('Accept', 'application/json')
-//         .expect(204, done);
-});
+
+    it('should create a travel', done => {
+      api
+        .post('/api/travels')
+        .set('Accept', 'application/json')
+        .send({
+          travel: {
+            budget: 4000,
+            startTravelDate: new Date(),
+            endTravelDate: new Date(),
+            country: 'Seattle',
+            hotelCost: 1500,
+            currency: 'USD',
+            foodCost: 300,
+            extra: 100,
+            travelCost: 500,
+            transportation: 100,
+            extra_money_for_set_week: 0
+          }
+        })
+        .end((err, res) => {
+          const travel = res.body;
+
+          expect(travel)
+            .to.have.property('_id')
+            .and.to.be.a('string');
+
+          expect(travel)
+            .to.have.property('budget')
+            .and.to.be.a('number');
+
+          expect(travel)
+            .to.have.property('startTravelDate')
+            .and.to.be.a('string');
+
+          expect(travel)
+            .to.have.property('endTravelDate')
+            .and.to.be.a('string');
+
+          expect(travel)
+            .to.have.property('country')
+            .and.to.be.a('string');
+
+          expect(travel)
+            .to.have.property('hotelCost')
+            .and.to.be.a('number');
+
+          expect(travel)
+            .to.have.property('foodCost')
+            .and.to.be.a('number');
+
+          expect(travel)
+            .to.have.property('extra')
+            .and.to.be.a('number');
+
+          expect(travel)
+            .to.have.property('travelCost')
+            .and.to.be.a('number');
+
+          expect(travel)
+            .to.have.property('transportation')
+            .and.to.be.a('number');
+
+          expect(travel)
+            .to.have.property('createdAt')
+            .and.to.be.a('string');
+
+          expect(travel)
+            .to.have.property('updatedAt')
+            .and.to.be.a('string');
+
+
+          done();
+        });
+    });
+
+  });
+
 });

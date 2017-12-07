@@ -20,10 +20,22 @@ class TravelsIndex extends React.Component {
     return (
       <div>
         <div className="row">
+          <h1> WELCOME BACK</h1>
           <div className="page-banner col-md-12">
-            {/* { Auth.isAuthenticated() && <Link to="/travels/new" className="main-button">
-              <i className="fa fa-plus" aria-hidden="true"></i>Add Food
-            </Link>} */}
+            <button className="main-button">
+              { Auth.isAuthenticated() && <Link to="/travels/new" className="main-button">
+                <h1>Prepare your travel</h1>
+              </Link>}{ Auth.isAuthenticated() && <Link to="/travels/form" className="main-button">
+              </Link>}
+            </button>
+          </div>
+          <div className="page-banner col-md-12">
+            <button className="main-button">
+              { Auth.isAuthenticated() && <Link to="/travels/new" className="main-button">
+                <h1>Current Travel</h1>
+              </Link>}{ Auth.isAuthenticated() && <Link to="/travels/form2" className="main-button">
+              </Link>}
+            </button>
           </div>
           {this.state.travels.map(travel => {
             return(

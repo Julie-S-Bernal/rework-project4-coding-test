@@ -5,7 +5,7 @@ import Login    from '../auth/Login';
 import Register from '../auth/Register';
 
 import TravelsIndex from '../travels/TravelsIndex';
-// import TravelsShow  from  '../travels/TravelsShow';
+import TravelsShow  from  '../travels/TravelsShow';
 // import TravelsNew   from '../travels/TravelsNew';
 // import TravelsEdit  from '../travels/TravelsEdit';
 
@@ -19,7 +19,7 @@ const Routes = () => {
       <Route exact path="/" component={TravelsIndex} />
       {/* <ProtectedRoute path="/travels/new" component={TravelsNew} /> */}
       {/* <ProtectedRoute path="/travels/:id/edit" component={TravelsEdit} /> */}
-      {/* <Route path="/travels/:id" component={TravelsShow} /> */}
+      <Route path="/travels/:id" component={TravelsShow} />
     </Switch>
   );
 };

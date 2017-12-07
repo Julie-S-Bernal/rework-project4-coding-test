@@ -1,3 +1,4 @@
+// add money an user earn a year, all the stuff that is not going to change.
 import React from 'react';
 
 const RegisterForm = ({ handleChange, handleSubmit, user }) => {
@@ -33,26 +34,66 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
           className="form-control"
         />
       </div>
-      {/* <div className="form-group">
+      <div className="form-group">
         <input
           type="text"
-          name="Country of residence"
+          name="homeCountry"
           placeholder="Country of residence"
           onChange={handleChange}
-          value={user.country_of_residence}
+          value={user.homeCountry}
+          className="form-control"
+        />
+      </div>
+      <div className="form-group">
+        <input
+          type="text"
+          name="homecurrency"
+          placeholder="home Currency"
+          onChange={handleChange}
+          value={user.homeCurrency}
           className="form-control"
         />
       </div>
       <div className="form-group">
         <input
           type="name"
-          name="currency"
-          placeholder="currency"
+          name="salary"
+          placeholder="salary"
           onChange={handleChange}
-          value={user.default_currency}
+          value={user.salary}
           className="form-control"
         />
-      </div> */}
+      </div>
+      <div className="form-group">
+        <input
+          type="name"
+          name="monthlySalary"
+          placeholder="monthly Salary"
+          onChange={handleChange}
+          value={user.monthlySalary}
+          className="form-control"
+        />
+      </div>
+      <div className="form-group">
+        <input
+          type="name"
+          name="livingExpensesYear"
+          placeholder="Yearly Living Expenses"
+          onChange={handleChange}
+          value={user.livingExpensesYear}
+          className="form-control"
+        />
+      </div>
+      <div className="form-group">
+        <input
+          type="name"
+          name="livingExpensesMonth"
+          placeholder="Monthly Living Expenses "
+          onChange={handleChange}
+          value={user.livingExpensesMonth}
+          className="form-control"
+        />
+      </div>
       <div className="form-group">
         <input
           type="password"
