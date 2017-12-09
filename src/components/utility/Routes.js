@@ -6,10 +6,10 @@ import Register from '../auth/Register';
 
 import TravelsIndex from '../travels/TravelsIndex';
 import TravelsShow  from  '../travels/TravelsShow';
-// import TravelsNew   from '../travels/TravelsNew';
-// import TravelsEdit  from '../travels/TravelsEdit';
+import TravelsNew   from '../travels/TravelsNew';
+import TravelsEdit  from '../travels/TravelsEdit';
 
-// import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from './ProtectedRoute';
 
 const Routes = () => {
   return (
@@ -17,8 +17,8 @@ const Routes = () => {
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route exact path="/" component={TravelsIndex} />
-      {/* <ProtectedRoute path="/travels/new" component={TravelsNew} /> */}
-      {/* <ProtectedRoute path="/travels/:id/edit" component={TravelsEdit} /> */}
+      <ProtectedRoute path="/travels/new" component={TravelsNew} />
+      <ProtectedRoute path="/travels/:id/edit" component={TravelsEdit} />
       <Route path="/travels/:id" component={TravelsShow} />
     </Switch>
   );

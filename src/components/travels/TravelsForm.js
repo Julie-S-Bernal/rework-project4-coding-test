@@ -1,53 +1,49 @@
-// add money an user earn a year, all the stuff that is not going to change.
 import React from 'react';
 import currencyList from '../../lib/currencyList';
 import {TextField} from 'material-ui';
-import Select from 'material-ui/Select';
 import { FormControl } from 'material-ui/Form';
-import Button from 'material-ui/Button';
+import Select from 'material-ui/Select';
 import Input, { InputLabel } from 'material-ui/Input';
+import Button from 'material-ui/Button';
+import { DatePicker } from 'material-ui-pickers';
+import {ArrowBack, ArrowForward}  from 'material-ui-icons';
 
-const RegisterForm = ({ handleChange, handleSubmit, user }) => {
+const TravelsFormTrip = ({ handleChange, handleSubmit, travel }) => {
   return (
-
     <form onSubmit={handleSubmit}>
       <div className="form-group">
         <TextField
-          type="text"
-          name="name"
-          placeholder="name"
+          label="text"
+          name="budget"
+          placeholder="budget"
           onChange={handleChange}
-          value={user.name}
+          value={travel.budget}
           className="form-control"
+        />
+      </div>
+      <div className="form-group">
+        <DatePicker
+          value={travel.startTravelDate}
+          onChange={handleChange}
+          leftArrowIcon={<ArrowBack />}
+          rightArrowIcon={<ArrowForward />}
+        />
+      </div>
+      <div className="form-group">
+        <DatePicker
+          value={travel.endTravelDate}
+          onChange={handleChange}
+          leftArrowIcon={<ArrowBack />}
+          rightArrowIcon={<ArrowForward />}
         />
       </div>
       <div className="form-group">
         <TextField
           type="text"
-          name="surname"
-          placeholder="Surname"
+          name="country"
+          placeholder="Country"
           onChange={handleChange}
-          value={user.surname}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <input
-          type="text"
-          name="email"
-          placeholder="Email"
-          onChange={handleChange}
-          value={user.email}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <TextField
-          type="text"
-          name="homeCountry"
-          placeholder="Country of residence"
-          onChange={handleChange}
-          value={user.homeCountry}
+          value={travel.country}
           className="form-control"
         />
       </div>
@@ -56,79 +52,78 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
           <InputLabel htmlFor="currency-code-native">Currency</InputLabel>
           <Select
             native
-            value={user.curency.code}
+            value={travel.currency.code}
             onChange={handleChange}
-            className="form-control"
             input={<Input name="currency" id="currency-code-native" />}
           >
-            {currencyList.map(currency => <option key={currency.code} value={currency.code}>{currency.name}</option>)}
+            { currencyList.map(currency => <option  key={currency.code} value={currency.code}>{currency.name}</option>) }
           </Select>
         </FormControl>
       </div>
       <div className="form-group">
-        <input
+        <TextField
           type="name"
-          name="salary"
-          placeholder="salary"
+          name="hotelCost"
+          placeholder="Hotel cost"
           onChange={handleChange}
-          value={user.salary}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <input
-          type="name"
-          name="monthlySalary"
-          placeholder="monthly Salary"
-          onChange={handleChange}
-          value={user.monthlySalary}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <input
-          type="name"
-          name="livingExpensesYear"
-          placeholder="Yearly Living Expenses"
-          onChange={handleChange}
-          value={user.livingExpensesYear}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <input
-          type="name"
-          name="livingExpensesMonth"
-          placeholder="Monthly Living Expenses "
-          onChange={handleChange}
-          value={user.livingExpensesMonth}
+          value={travel.hotelCost}
           className="form-control"
         />
       </div>
       <div className="form-group">
         <TextField
-          type="password"
-          name="password"
-          placeholder="Password"
+          type="foodCost"
+          name="foodCost"
+          placeholder="Food cost"
           onChange={handleChange}
-          value={user.password}
+          value={travel.foodCost}
           className="form-control"
         />
       </div>
       <div className="form-group">
         <TextField
-          type="password"
-          name="passwordConfirmation"
-          placeholder="Confirm Password"
+          type="extra"
+          name="extra"
+          placeholder="Other expenses"
           onChange={handleChange}
-          value={user.password_confirmation}
+          value={travel.extra}
+          className="form-control"
+        />
+      </div>
+      <div className="form-group">
+        <TextField
+          type="travelCost"
+          name="travelCost"
+          placeholder="Travel cost"
+          onChange={handleChange}
+          value={travel.travelCost}
+          className="form-control"
+        />
+      </div>
+      <div className="form-group">
+        <TextField
+          type="transportation"
+          name="transporation"
+          placeholder="transportation"
+          onChange={handleChange}
+          value={travel.transporation}
+          className="form-control"
+        />
+      </div>
+      <div className="form-group">
+        <TextField
+          type="createdBy"
+          name="createdBy"
+          placeholder=""
+          onChange={handleChange}
+          value={travel.createdBy}
           className="form-control"
         />
       </div>
 
-      <Button type="submit" className="btn btn-primary">Register</Button>
+      <Button type="submit" className="btn btn-primary">Submit</Button>
     </form>
   );
 };
 
-export default RegisterForm;
+export default TravelsFormTrip;

@@ -10,7 +10,8 @@ function travelsIndex(req, res, next) {
 
 function travelsCreate(req, res, next) {
 
-  if(req.file) req.body.image = req.file.filename;
+  // if(req.file) req.body.image = req.file.filename;
+  req.body.createdBy = req.currentUser;
 
   Travel
     .create(req.body)

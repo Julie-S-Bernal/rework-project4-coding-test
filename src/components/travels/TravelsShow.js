@@ -22,16 +22,36 @@ class TravelsShow extends React.Component {
       .catch(err => console.log(err));
   }
 
+  componentWillMount() {
+    Axios
+      .get('https://www.alphavantage.co/query', {
+        params: {
+          function: 'CURRENCY_EXCHANGE_RATE',
+          from_currency: 'JPY',
+          to_currency: 'USD',
+          apikey: 'USD&OZZ3948H22SG8ADG'
+        }
+      })
+      .then(response => {
+        console.log(response);
+        // get user currency
+        // replace from_currency with user currencyList
+        // retrieve the new String to get currency exchange rates
+        // get {budget} and multiply it by it
+        // insert it in the HTML
+        // 
+      })
+      .catch(err => console.log(err));
+  }
+
+
   render() {
     return(
       <div className="row">
-
-        <div className="image-tile col-md-6">
-          <img src={this.state.travel.image} className="img-responsive" />
-        </div>
         <div className="col-md-6">
-          <h3>{ this.state.travel.title }</h3>
-          <h4>{ this.state.travel.category }</h4>
+          <h3>{ this.state.travel.country}</h3>
+          <h4>{ this.state.travel.startTravelDate }</h4>
+          <h4>{ this.state.travel.budget }</h4>
           <button className="standard-button">
             <Link to={`/travels/${this.state.travel.id}/edit`} >
               Edit

@@ -11,7 +11,8 @@ const travelSchema = mongoose.Schema({
   foodCost: { type: Number},
   extra: { type: Number},
   travelCost: {type: Number},
-  transportation: { type: Number, required: true }
+  transportation: { type: Number},
+  createdBy: {type: String}
 }, {
   timestamps: true
 });
