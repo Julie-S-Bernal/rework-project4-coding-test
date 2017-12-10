@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 
 class TravelsShow extends React.Component {
   state = {
-    travel: {}
+    travel: {},
+    rate: 1,
+    user: {}
   }
 
   deleteTravel = () => {
@@ -16,9 +18,13 @@ class TravelsShow extends React.Component {
   }
 
   componentDidMount() {
-    Axios
-      .get(`/api/travels/${this.props.match.params.id}`)
+    Axios.all([
+      Axios.get(`/api/travels/${this.props.match.params.id}`),
+      Axios.get(`/api/user/${this.props.match.params.id}`)
+    ])
+
       .then(res => this.setState({ travel: res.data }))
+      .then(res => this.setState({ user: res.data }))
       .catch(err => console.log(err));
   }
 
@@ -27,19 +33,16 @@ class TravelsShow extends React.Component {
       .get('https://www.alphavantage.co/query', {
         params: {
           function: 'CURRENCY_EXCHANGE_RATE',
-          from_currency: 'JPY',
-          to_currency: 'USD',
+          from_currency: 'JPY', //this.props.user.currency,
+          to_currency: 'USD',//this.props.travel.currency,
           apikey: 'USD&OZZ3948H22SG8ADG'
+
         }
       })
       .then(response => {
-        console.log(response);
-        // get user currency
-        // replace from_currency with user currencyList
-        // retrieve the new String to get currency exchange rates
-        // get {budget} and multiply it by it
-        // insert it in the HTML
-        // 
+        const rate = response.data['Realtime Currency Exchange Rate']['5. Exchange Rate'];
+        console.log(rate * user.budget);
+
       })
       .catch(err => console.log(err));
   }

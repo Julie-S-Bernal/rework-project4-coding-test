@@ -19,6 +19,9 @@ router.route('/register')
 router.route('/login')
   .post(auth.login);
 
+// router.route('/user')
+//   .get(secureRoute, users)
+
 router.all('/*', (req, res) => res.notFound());
 
 module.exports = router;

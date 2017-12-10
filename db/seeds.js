@@ -25,7 +25,6 @@ const travelData = [{
 }];
 
 const userData = [{
-
   name: 'Sheldon',
   surname: 'Cooper',
   email: 'cooper@gmail.com',
@@ -36,11 +35,12 @@ const userData = [{
   salary: '107794',
   monthlySalary: '8982',
   livingExpensesYear: '60000',
-  livingExpensesMonth: '5000'
-
+  livingExpensesMonth: '5000',
+  currentToken: null
 }];
 
 const imageData = [{
+
 
   image: 'https://images.pexels.com/photos/315191/pexels-photo-315191.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb'
 }];

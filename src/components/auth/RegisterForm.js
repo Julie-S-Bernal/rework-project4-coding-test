@@ -1,4 +1,3 @@
-// add money an user earn a year, all the stuff that is not going to change.
 import React from 'react';
 import currencyList from '../../lib/currencyList';
 import {TextField} from 'material-ui';
@@ -7,8 +6,11 @@ import { FormControl } from 'material-ui/Form';
 import Button from 'material-ui/Button';
 import Input, { InputLabel } from 'material-ui/Input';
 
+
+
 const RegisterForm = ({ handleChange, handleSubmit, user }) => {
   return (
+
 
     <form onSubmit={handleSubmit}>
       <div className="form-group">
@@ -24,15 +26,15 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
       <div className="form-group">
         <TextField
           type="text"
-          name="surname"
-          placeholder="Surname"
+          name="lastName"
+          placeholder="Last name"
           onChange={handleChange}
-          value={user.surname}
+          value={user.lastName}
           className="form-control"
         />
       </div>
       <div className="form-group">
-        <input
+        <textField
           type="text"
           name="email"
           placeholder="Email"
@@ -56,7 +58,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
           <InputLabel htmlFor="currency-code-native">Currency</InputLabel>
           <Select
             native
-            value={user.curency.code}
+            value={user.homeCurrency.code}
             onChange={handleChange}
             className="form-control"
             input={<Input name="currency" id="currency-code-native" />}
@@ -66,7 +68,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
         </FormControl>
       </div>
       <div className="form-group">
-        <input
+        <TextField
           type="name"
           name="salary"
           placeholder="salary"
@@ -76,7 +78,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
         />
       </div>
       <div className="form-group">
-        <input
+        <TextField
           type="name"
           name="monthlySalary"
           placeholder="monthly Salary"
@@ -86,7 +88,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
         />
       </div>
       <div className="form-group">
-        <input
+        <TextField
           type="name"
           name="livingExpensesYear"
           placeholder="Yearly Living Expenses"
@@ -96,7 +98,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
         />
       </div>
       <div className="form-group">
-        <input
+        <TextField
           type="name"
           name="livingExpensesMonth"
           placeholder="Monthly Living Expenses "
@@ -129,6 +131,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
       <Button type="submit" className="btn btn-primary">Register</Button>
     </form>
   );
+
 };
 
 export default RegisterForm;

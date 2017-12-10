@@ -1,10 +1,13 @@
 import React from 'react';
+import {TextField} from 'material-ui';
+import Button from 'material-ui/Button';
+
 
 const LoginForm = ({ handleChange, handleSubmit, user }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
-        <input
+        <TextField
           type="text"
           name="email"
           placeholder="email"
@@ -14,7 +17,7 @@ const LoginForm = ({ handleChange, handleSubmit, user }) => {
         />
       </div>
       <div className="form-group">
-        <input
+        <TextField
           type="password"
           name="password"
           placeholder="Password"
@@ -23,7 +26,7 @@ const LoginForm = ({ handleChange, handleSubmit, user }) => {
           className="form-control"
         />
       </div>
-      <button className="btn btn-primary">Login</button>
+      <Button type="submit" className="btn btn-primary">Login</Button>
     </form>
   );
 };

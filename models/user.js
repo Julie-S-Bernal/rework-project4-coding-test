@@ -11,8 +11,8 @@ const userSchema = new mongoose.Schema({
   salary: {type: Number, trim: true, required: true},
   monthlySalary: {type: Number, trim: true, required: true},
   livingExpensesYear: {type: Number, trim: true, required: true },
-  livingExpensesMonth: {type: Number, trim: true, required: true }
-
+  livingExpensesMonth: {type: Number, trim: true, required: true },
+  currentToken: {type: String, trim: true, required: false}
 }, {
   timestamps: true
 });

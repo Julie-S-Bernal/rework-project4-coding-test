@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-//change to camelcase
+
 
 const travelSchema = mongoose.Schema({
   budget: { type: Number, required: true },
