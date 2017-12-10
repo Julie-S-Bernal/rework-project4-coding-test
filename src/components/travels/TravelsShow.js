@@ -1,9 +1,11 @@
 import React    from 'react';
 import Axios    from 'axios';
 import { Link } from 'react-router-dom';
+import Auth from '../../lib/Auth';
 
 
 class TravelsShow extends React.Component {
+
   state = {
     travel: {},
     rate: 1,
@@ -18,34 +20,37 @@ class TravelsShow extends React.Component {
   }
 
   componentDidMount() {
+
+
+    const user = Auth.getPayload();
+    console.log(user);
+
     Axios.all([
       Axios.get(`/api/travels/${this.props.match.params.id}`),
-      Axios.get(`/api/user/${this.props.match.params.id}`)
+      Axios.get(`/api/user/${user.userId}`)
     ])
 
-      .then(res => this.setState({ travel: res.data }))
-      .then(res => this.setState({ user: res.data }))
+      .then(res => console.log(res.data))
       .catch(err => console.log(err));
   }
-
-  componentWillMount() {
-    Axios
-      .get('https://www.alphavantage.co/query', {
-        params: {
-          function: 'CURRENCY_EXCHANGE_RATE',
-          from_currency: 'JPY', //this.props.user.currency,
-          to_currency: 'USD',//this.props.travel.currency,
-          apikey: 'USD&OZZ3948H22SG8ADG'
-
-        }
-      })
-      .then(response => {
-        const rate = response.data['Realtime Currency Exchange Rate']['5. Exchange Rate'];
-        console.log(rate * user.budget);
-
-      })
-      .catch(err => console.log(err));
-  }
+  // componentWillMount() {
+  //   Axios
+  //     .get('https://www.alphavantage.co/query', {
+  //       params: {
+  //         function: 'CURRENCY_EXCHANGE_RATE',
+  //         from_currency: 'JPY', //this.props.user.currency,
+  //         to_currency: 'USD',//this.props.travel.currency,
+  //         apikey: 'USD&OZZ3948H22SG8ADG'
+  //
+  //       }
+  //     })
+  //     .then(response => {
+  //       const rate = response.data['Realtime Currency Exchange Rate']['5. Exchange Rate'];
+  //       console.log(rate * user.budget);
+  //
+  //     })
+  //     .catch(err => console.log(err));
+  // }
 
 
   render() {

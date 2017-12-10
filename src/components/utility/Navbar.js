@@ -1,6 +1,6 @@
 import React                from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import {AppBar, Tabs, Tab} from 'material-ui';
+import { withRouter } from 'react-router-dom';
+import {AppBar, Button} from 'material-ui';
 
 import Auth from '../../lib/Auth';
 
@@ -8,22 +8,35 @@ const Navbar = ({ history }) => {
 
   function logout(e) {
     e.preventDefault();
-
-    Auth.removeToken();
+    Auth.logout();
     history.push('/');
   }
 
-  return(
-    <AppBar title="Travel app">
-      {/* <Tabs> */}
-        { !Auth.isAuthenticated() && <Link to="/login" className="standard-button">Login</Link>}
-        {' '}
-        { !Auth.isAuthenticated() && <Link to="/register"   className="standard-button">Register</Link>}
-        {' '}
-        { Auth.isAuthenticated() && <a href="#" className="standard-button" onClick={logout}>Logout</a>}
-        
+  function register(){
+    history.push('/register');
+  }
 
-      {/* </Tabs> */}
+  function login(){
+    history.push('/login');
+  }
+
+  return(
+    <AppBar position="static" title="Travel app">
+      { !Auth.isAuthenticated() &&
+        <Button onClick={login}>
+          Login
+        </Button>}
+      {' '}
+      { !Auth.isAuthenticated() &&
+        <Button onClick={register} className="standard-button">
+          Register
+        </Button>}
+      {' '}
+      { Auth.isAuthenticated() &&
+        <Button href="#" className="standard-button" onClick={logout}>
+          Logout
+        </Button>
+      }
     </AppBar>
   );
 };
