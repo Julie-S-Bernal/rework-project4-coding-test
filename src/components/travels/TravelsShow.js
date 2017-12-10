@@ -20,37 +20,40 @@ class TravelsShow extends React.Component {
   }
 
   componentDidMount() {
-
-
-    const user = Auth.getPayload();
-    console.log(user);
+    const userMeta = Auth.getPayload();
 
     Axios.all([
       Axios.get(`/api/travels/${this.props.match.params.id}`),
-      Axios.get(`/api/user/${user.userId}`)
+      Axios.get(`/api/user/${userMeta.userId}`)
     ])
+    .then(Axios.spread( (travel, user) => {
+      this.setState({
+        ...this.state,
+        travel: travel.data,
+        user: user.data
+      });
+      Axios
+        .get('https://www.alphavantage.co/query', {
+          params: {
+            function: 'CURRENCY_EXCHANGE_RATE',
+            from_currency: this.state.user.homeCurrency, //this.props.user.currency,
+            to_currency: this.state.travel.currency,//this.props.travel.currency,
+            apikey: 'USD&OZZ3948H22SG8ADG'
 
-      .then(res => console.log(res.data))
-      .catch(err => console.log(err));
+          }
+        })
+        .then(response => {
+          const rate = response.data['Realtime Currency Exchange Rate']['5. Exchange Rate'];
+          this.setState({...this.state, rate});
+        })
+        .catch(err => console.log(err));
+    }))
+    .catch(err => console.log(err));
   }
-  // componentWillMount() {
-  //   Axios
-  //     .get('https://www.alphavantage.co/query', {
-  //       params: {
-  //         function: 'CURRENCY_EXCHANGE_RATE',
-  //         from_currency: 'JPY', //this.props.user.currency,
-  //         to_currency: 'USD',//this.props.travel.currency,
-  //         apikey: 'USD&OZZ3948H22SG8ADG'
-  //
-  //       }
-  //     })
-  //     .then(response => {
-  //       const rate = response.data['Realtime Currency Exchange Rate']['5. Exchange Rate'];
-  //       console.log(rate * user.budget);
-  //
-  //     })
-  //     .catch(err => console.log(err));
-  // }
+
+  componentWillMount() {
+
+  }
 
 
   render() {
@@ -59,7 +62,8 @@ class TravelsShow extends React.Component {
         <div className="col-md-6">
           <h3>{ this.state.travel.country}</h3>
           <h4>{ this.state.travel.startTravelDate }</h4>
-          <h4>{ this.state.travel.budget }</h4>
+          <h4>{ this.state.travel.budget } {this.state.user.homeCurrency}</h4>
+          <h4>{ this.state.travel.budget * this.state.rate } {this.state.travel.currency}</h4>
           <button className="standard-button">
             <Link to={`/travels/${this.state.travel.id}/edit`} >
               Edit
