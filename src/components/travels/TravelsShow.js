@@ -30,12 +30,17 @@ class TravelsShow extends React.Component {
   }
 
   getTravelLengthInDays = () => {
-    console.log(this.state.travel.endTravelDate);
-    console.log(this.state.travel.startTravelDate);
     const days = moment(this.state.travel.endTravelDate).diff(moment(this.state.travel.startTravelDate) , 'days');
-    console.log(days);
     return days;
   }
+  divideBudget = () => {
+    //the one below gets me the right date, better way to rewritte it?
+    const days = moment(this.state.travel.endTravelDate).diff(moment(this.state.travel.startTravelDate) , 'days');
+    console.log('divide budget', this.state.travel.budget);
+    const result = this.state.travel.budget / days;
+    return result;
+  }
+
 
   componentDidMount() {
     const userMeta = Auth.getPayload();
@@ -76,7 +81,7 @@ class TravelsShow extends React.Component {
         <div>
           <VictoryChart
             theme={VictoryTheme.material}
-            domainPadding={10}
+          domainPadding={20}
           >
             <VictoryBar
               style={{ data: { fill: "#c43a31" } }}
@@ -92,9 +97,13 @@ class TravelsShow extends React.Component {
           <h4>{ moment(this.state.travel.endTravelDate).format('YYYY MM DD') }</h4>
           <h4>{ this.state.travel.budget } {this.state.user.homeCurrency}</h4>
           <h4>{ this.state.travel.budget * this.state.rate } {this.state.travel.currency}</h4>
+          <h4>Budget per day:{ this.state.travel.budget } /  </h4>
           <h4>
             {this.getTravelLengthInDays()}
           </h4>
+          <h4>divide budget {this.divideBudget()} {this.state.user.homeCurrency}</h4>
+          <h4>divide budget {this.divideBudget() * this.state.rate} {this.state.travel.currency}</h4>
+
           <button className="standard-button">
             <Link to={`/travels/${this.state.travel.id}/edit`} >
               Edit
