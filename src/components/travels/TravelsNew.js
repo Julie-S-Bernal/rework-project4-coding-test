@@ -25,6 +25,7 @@ class TravelsNew extends React.Component {
     this.setState({ travel });
   }
 
+
   handleStartDateChange = (selectedDate) => {
     this.setState({
       ...this.state,

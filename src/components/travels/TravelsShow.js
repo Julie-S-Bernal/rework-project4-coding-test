@@ -3,21 +3,21 @@ import Axios    from 'axios';
 import { Link } from 'react-router-dom';
 import Auth from '../../lib/Auth';
 import moment from 'moment';
-import {VictoryChart, VictoryBar, VictoryTheme} from 'victory';
+import {VictoryChart, VictoryBar, VictoryTheme, VictoryPie} from 'victory';
 
 // http://formidable.com/open-source/victory/docs/
 const sampleData = [
-  {quarter: 1, earnings: 13000},
-  {quarter: 2, earnings: 16500},
-  {quarter: 3, earnings: 14250},
-  {quarter: 4, earnings: 19000}
+  {day: 1, earnings: 200},
+  {day: 2, earnings: 16500},
+  {day: 3, earnings: 14250},
+  {day: 4, earnings: 19000}
 ];
 
 
 class TravelsShow extends React.Component {
 
   state = {
-    travel: {},
+    travel: null,
     rate: 1,
     user: {}
   }
@@ -76,6 +76,7 @@ class TravelsShow extends React.Component {
       }
 
   render() {
+    if (!this.state.travel) return null;
     return(
       <div className="row">
         <div>
@@ -84,12 +85,24 @@ class TravelsShow extends React.Component {
           domainPadding={20}
           >
             <VictoryBar
-              style={{ data: { fill: "#c43a31" } }}
+              style={{ data: { fill: "#AEEA00"  } }}
               data={sampleData}
               x="quarter"
               y="earnings"
             />
           </VictoryChart>
+        </div>
+        <div>
+          <VictoryPie
+            colorScale={["#880E4F", "#2E7D32","#AEEA00", "#F50057", "#827717"  ]}
+            data={[
+              { x: `${this.state.travel.foodCost}`, y: 40 },
+              { x: `${this.state.travel.hotelCost}`, y: 40 },
+              { x: `${this.state.travel.extra}`, y: 55 },
+              { x: `${this.state.travel.travelCost}`, y: 35 },
+              { x: `${this.state.travel.transportation}`, y: 40 }
+            ]}
+          />
         </div>
         <div className="col-md-6">
           <h3>{ this.state.travel.country}</h3>
