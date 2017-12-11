@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Auth from '../../lib/Auth';
 import moment from 'moment';
 import {VictoryChart, VictoryBar, VictoryTheme, VictoryPie} from 'victory';
+import CostsForm from './CostsForm';
 
 // http://formidable.com/open-source/victory/docs/
 const sampleData = [
@@ -42,11 +43,25 @@ class TravelsShow extends React.Component {
   }
 
   newBudget =() => {
-
     const budgetSum = this.state.travel.hotelCost +  this.state.travel.extra + this.state.travel.foodCost + this.state.travel.transportation + this.state.travel.travelCost;
     console.log('this is', budgetSum);
     return(budgetSum);
 
+  }
+
+  handleChange = ({ target: { name, value } }) => {
+    const travel = Object.assign({}, this.state.travel, { [name]: value });
+    this.setState({ travel: travel });
+  }
+
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    Axios
+      .put(`/api/travels/${this.state.travel._id}`, this.state.travel)
+      .then(() => this.props.history.push(`/travels/${this.state.travel._id}`))
+      .catch(err => console.log(err));
   }
 
 
@@ -85,9 +100,12 @@ class TravelsShow extends React.Component {
 
   render() {
     if (!this.state.travel) return null;
+
+
+    console.log('hotel cost', this.state.travel.hotelCost);
     return(
       <div className="row">
-        <div>
+        {/* <div>
           <VictoryChart
             theme={VictoryTheme.material}
             domainPadding={20}
@@ -99,32 +117,55 @@ class TravelsShow extends React.Component {
               y="earnings"
             />
           </VictoryChart>
-        </div>
+        </div> */}
         <div>
           <VictoryPie
+
             colorScale={['#880E4F', '#2E7D32','#AEEA00', '#F50057', '#827717'  ]}
             data={[
-              { x: `${this.state.travel.foodCost}`, y: 40 },
-              { x: `${this.state.travel.hotelCost}`, y: 40 },
-              { x: `${this.state.travel.extra}`, y: 55 },
-              { x: `${this.state.travel.travelCost}`, y: 35 },
-              { x: `${this.state.travel.transportation}`, y: 40 }
+              { x: 'food cost', y: this.state.travel.foodCost, label: `Food ${this.state.travel.foodCost}` },
+              { x: 'hotel cost', y: parseInt(this.state.travel.hotelCost), label: `Hotel ${this.state.travel.hotelCost}` },
+              { x: 'extra', y: this.state.travel.extra, label: `Extra ${this.state.travel.extra}`},
+              { x: 'travel cost', y: this.state.travel.travelCost, label: `Travel  ${this.state.travel.travelCost}`},
+              { x: 'transportation', y: this.state.travel.transportation, label: `Transportation ${this.state.travel.transportation}` }
+            ]}
+            events={[
+              {
+                target: 'data',
+                eventHandlers: {
+                  onClick: () => {
+
+                    return [{
+                      target: 'labels',
+                      mutation: (props) => {
+                        return props.text === 'clicked' ?
+                          null : { text: 'clicked' };
+                      }
+                    }];
+                  }
+                }
+              }
             ]}
           />
         </div>
         <div className="col-md-6">
-          <h3>{ this.state.travel.country}</h3>
-          <h4>{ moment(this.state.travel.startTravelDate).format('YYYY MM DD') }</h4>
-          <h4>{ moment(this.state.travel.endTravelDate).format('YYYY MM DD') }</h4>
-          <h4>{ this.state.travel.budget } {this.state.user.homeCurrency}</h4>
-          <h4>{ this.state.travel.budget * this.state.rate } {this.state.travel.currency}</h4>
-          <h4>Budget per day:{ this.state.travel.budget } /  </h4>
+
+          <h3> Country name:{ this.state.travel.country}</h3>
+          <h4>start date:{ moment(this.state.travel.startTravelDate).format('YYYY MM DD') }</h4>
+          <h4>end date:{ moment(this.state.travel.endTravelDate).format('YYYY MM DD') }</h4>
+          <h4>total budget in user currency: { this.newBudget()} {this.state.user.homeCurrency}</h4>
+          <h4>total budget multiplied by exchanged rate:{ this.newBudget() * this.state.rate } {this.state.travel.currency}</h4>
+
           <h4>
-            {this.getTravelLengthInDays()}
+            length of travel: {this.getTravelLengthInDays()}
           </h4>
-          <h4>divide budget {this.divideBudget()} {this.state.user.homeCurrency}</h4>
-          <h4>divide budget {this.divideBudget() * this.state.rate} {this.state.travel.currency}</h4>
-          <h4>  {this.newBudget()}</h4>
+          <h4>per day budget {this.divideBudget()} {this.state.user.homeCurrency}</h4>
+          <h4>per day budget {this.divideBudget() * this.state.rate} {this.state.travel.currency}</h4>
+          <CostsForm
+            travel={this.state.travel}
+            handleChange={this.handleChange}
+            handleSubmit={this.handleSubmit}
+          />
           <Link to={`/travels/${this.state.travel._id}/edit`} >
             Edit
           </Link>
