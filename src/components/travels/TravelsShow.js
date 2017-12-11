@@ -29,8 +29,12 @@ class TravelsShow extends React.Component {
       .catch(err => console.log(err));
   }
 
-  getTravelLenghtInDays = () => {
-    return moment(this.state.travel.endTravelDate).diff(moment(this.state.travel.startTravelDate) , 'days')
+  getTravelLengthInDays = () => {
+    console.log(this.state.travel.endTravelDate);
+    console.log(this.state.travel.startTravelDate);
+    const days = moment(this.state.travel.endTravelDate).diff(moment(this.state.travel.startTravelDate) , 'days');
+    console.log(days);
+    return days;
   }
 
   componentDidMount() {
@@ -84,12 +88,12 @@ class TravelsShow extends React.Component {
         </div>
         <div className="col-md-6">
           <h3>{ this.state.travel.country}</h3>
-          <h4>{ this.state.travel.startTravelDate }</h4>
-          <h4>{ this.state.travel.endTravelDate }</h4>
+          <h4>{ moment(this.state.travel.startTravelDate).format('YYYY MM DD') }</h4>
+          <h4>{ moment(this.state.travel.endTravelDate).format('YYYY MM DD') }</h4>
           <h4>{ this.state.travel.budget } {this.state.user.homeCurrency}</h4>
           <h4>{ this.state.travel.budget * this.state.rate } {this.state.travel.currency}</h4>
           <h4>
-            {this.getTravelLenghtInDays()}
+            {this.getTravelLengthInDays()}
           </h4>
           <button className="standard-button">
             <Link to={`/travels/${this.state.travel.id}/edit`} >

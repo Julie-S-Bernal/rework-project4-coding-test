@@ -46,15 +46,13 @@ class TravelsNew extends React.Component {
   };
 
   handleSubmit = (e) => {
-
-    console.log(this.state.travel.startTravelDate.format('YYYY-MM-DD'));
-
     e.preventDefault();
+
     Axios
       .post('/api/travels', {
         ...this.state.travel,
-        startTravelDate: this.state.travel.startTravelDate.format('YYYY-MM-DD'),
-        endTravelDate: this.state.travel.endTravelDate.format('YYYY-MM-DD')
+        startTravelDate: this.state.travel.startTravelDate,
+        endTravelDate: this.state.travel.endTravelDate
       }, {
         headers: { Authorization: `Bearer ${Auth.getToken()}`}
       })
