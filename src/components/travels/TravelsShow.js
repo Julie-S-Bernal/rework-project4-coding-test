@@ -41,6 +41,14 @@ class TravelsShow extends React.Component {
     return result;
   }
 
+  newBudget =() => {
+
+  const budgetSum = this.state.travel.hotelCost + this.state.travel.extra;
+  console.log('this is', budgetSum);
+  return(budgetSum);
+
+  }
+
 
   componentDidMount() {
     const userMeta = Auth.getPayload();
@@ -116,7 +124,7 @@ class TravelsShow extends React.Component {
           </h4>
           <h4>divide budget {this.divideBudget()} {this.state.user.homeCurrency}</h4>
           <h4>divide budget {this.divideBudget() * this.state.rate} {this.state.travel.currency}</h4>
-
+          <h4>  {this.newBudget()}</h4>
           <button className="standard-button">
             <Link to={`/travels/${this.state.travel.id}/edit`} >
               Edit
