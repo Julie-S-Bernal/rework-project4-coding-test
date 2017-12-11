@@ -8,12 +8,20 @@ import Button from 'material-ui/Button';
 import { DatePicker } from 'material-ui-pickers';
 import {ArrowBack, ArrowForward}  from 'material-ui-icons';
 
-const TravelsFormTrip = ({ handleChange, handleSubmit, travel }) => {
+
+const TravelsFormTrip = ({
+  handleChange,
+  handleSubmit,
+  handleStartDateChange,
+  handleEndDateChange,
+  travel
+}) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
         <TextField
-          label="text"
+          type="text"
+          label="Budget"
           name="budget"
           placeholder="budget"
           onChange={handleChange}
@@ -23,8 +31,9 @@ const TravelsFormTrip = ({ handleChange, handleSubmit, travel }) => {
       </div>
       <div className="form-group">
         <DatePicker
+          onChange={handleStartDateChange}
           value={travel.startTravelDate}
-          onChange={handleChange}
+          returnMoment
           leftArrowIcon={<ArrowBack />}
           rightArrowIcon={<ArrowForward />}
         />
@@ -32,7 +41,8 @@ const TravelsFormTrip = ({ handleChange, handleSubmit, travel }) => {
       <div className="form-group">
         <DatePicker
           value={travel.endTravelDate}
-          onChange={handleChange}
+          onChange={handleEndDateChange}
+          returnMoment
           leftArrowIcon={<ArrowBack />}
           rightArrowIcon={<ArrowForward />}
         />
@@ -52,17 +62,17 @@ const TravelsFormTrip = ({ handleChange, handleSubmit, travel }) => {
           <InputLabel htmlFor="currency-code-native">Currency</InputLabel>
           <Select
             native
-            value={travel.currency.code}
+            value={travel.currency}
             onChange={handleChange}
             input={<Input name="currency" id="currency-code-native" />}
           >
-            { currencyList.map(currency => <option  key={currency.code} value={currency.code}>{currency.name}</option>) }
+            { currencyList.map(cur => <option  key={cur.code} value={cur.code}>{cur.name}</option>) }
           </Select>
         </FormControl>
       </div>
       <div className="form-group">
         <TextField
-          type="name"
+          label="Hotel Cost"
           name="hotelCost"
           placeholder="Hotel cost"
           onChange={handleChange}
@@ -72,7 +82,7 @@ const TravelsFormTrip = ({ handleChange, handleSubmit, travel }) => {
       </div>
       <div className="form-group">
         <TextField
-          type="foodCost"
+          label="Food Cost"
           name="foodCost"
           placeholder="Food cost"
           onChange={handleChange}
@@ -82,7 +92,7 @@ const TravelsFormTrip = ({ handleChange, handleSubmit, travel }) => {
       </div>
       <div className="form-group">
         <TextField
-          type="extra"
+          label="Extra Cost"
           name="extra"
           placeholder="Other expenses"
           onChange={handleChange}
@@ -92,7 +102,7 @@ const TravelsFormTrip = ({ handleChange, handleSubmit, travel }) => {
       </div>
       <div className="form-group">
         <TextField
-          type="travelCost"
+          label="Travel Cost"
           name="travelCost"
           placeholder="Travel cost"
           onChange={handleChange}
@@ -102,11 +112,11 @@ const TravelsFormTrip = ({ handleChange, handleSubmit, travel }) => {
       </div>
       <div className="form-group">
         <TextField
-          type="transportation"
-          name="transporation"
+          label="Transportation Cost"
+          name="transportation"
           placeholder="transportation"
           onChange={handleChange}
-          value={travel.transporation}
+          value={travel.transportation}
           className="form-control"
         />
       </div>

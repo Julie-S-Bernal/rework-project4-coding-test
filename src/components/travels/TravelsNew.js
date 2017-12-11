@@ -7,30 +7,55 @@ import TravelsForm from './TravelsForm';
 class TravelsNew extends React.Component {
   state = {
     travel: {
-      budget: '',
-      startTravelDate: moment.now(),
-      endTravelDate: moment.now(),
-      travelDuration: '',
-      country: '',
-      currency: '',
-      hotelCost: '',
-      travelCost: '',
-      extra: '',
-      foodCost: '',
-      transportation: ''
+      budget: 0,
+      startTravelDate: moment(),
+      endTravelDate: moment(),
+      country: 'USA',
+      currency: 'GBP',
+      hotelCost: 0,
+      travelCost: 0,
+      extra: 0,
+      foodCost: 0,
+      transportation: 0
     }
   }
 
-  handleChange = ({ target: { name, value } }) => {
+  handleChange = ({ target: { name, value }}) => {
     const travel = Object.assign({}, this.state.travel, { [name]: value });
     this.setState({ travel });
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleStartDateChange = (selectedDate) => {
+    this.setState({
+      ...this.state,
+      travel: {
+        ...this.travel,
+        startTravelDate: selectedDate
+      }
+    });
+  };
 
+  handleEndDateChange = (selectedDate) => {
+    this.setState({
+      ...this.state,
+      travel: {
+        ...this.travel,
+        endTravelDate: selectedDate
+      }
+    });
+  };
+
+  handleSubmit = (e) => {
+
+    console.log(this.state.travel.startTravelDate.format('YYYY-MM-DD'));
+
+    e.preventDefault();
     Axios
-      .post('/api/travels', this.state.travel, {
+      .post('/api/travels', {
+        ...this.state.travel,
+        startTravelDate: this.state.travel.startTravelDate.format('YYYY-MM-DD'),
+        endTravelDate: this.state.travel.endTravelDate.format('YYYY-MM-DD')
+      }, {
         headers: { Authorization: `Bearer ${Auth.getToken()}`}
       })
       .then(() => this.props.history.push('/'))
@@ -42,6 +67,8 @@ class TravelsNew extends React.Component {
       <TravelsForm
         handleSubmit={ this.handleSubmit }
         handleChange={ this.handleChange }
+        handleStartDateChange={ this.handleStartDateChange }
+        handleEndDateChange={ this.handleEndDateChange}
         travel={ this.state.travel }
       />
     );

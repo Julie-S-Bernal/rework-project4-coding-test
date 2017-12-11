@@ -26,6 +26,7 @@ class Register extends React.Component {
     this.setState({ user });
   }
 
+
     handleSubmit = (e) => {
       e.preventDefault();
 

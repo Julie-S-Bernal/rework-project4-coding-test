@@ -23,5 +23,5 @@ function usersShow(req, res, next) {
 
 module.exports = {
 
-  show: usersShow
+show: usersShow
 };
