@@ -43,9 +43,9 @@ class TravelsShow extends React.Component {
 
   newBudget =() => {
 
-  const budgetSum = this.state.travel.hotelCost + this.state.travel.extra;
-  console.log('this is', budgetSum);
-  return(budgetSum);
+    const budgetSum = this.state.travel.hotelCost +  this.state.travel.extra + this.state.travel.foodCost + this.state.travel.transportation + this.state.travel.travelCost;
+    console.log('this is', budgetSum);
+    return(budgetSum);
 
   }
 
@@ -79,9 +79,9 @@ class TravelsShow extends React.Component {
             this.setState({...this.state, rate});
           })
           .catch(err => console.log(err));
-        }))
-        .catch(err => console.log(err));
-      }
+      }))
+      .catch(err => console.log(err));
+  }
 
   render() {
     if (!this.state.travel) return null;
@@ -90,10 +90,10 @@ class TravelsShow extends React.Component {
         <div>
           <VictoryChart
             theme={VictoryTheme.material}
-          domainPadding={20}
+            domainPadding={20}
           >
             <VictoryBar
-              style={{ data: { fill: "#AEEA00"  } }}
+              style={{ data: { fill: '#AEEA00' } }}
               data={sampleData}
               x="quarter"
               y="earnings"
@@ -102,7 +102,7 @@ class TravelsShow extends React.Component {
         </div>
         <div>
           <VictoryPie
-            colorScale={["#880E4F", "#2E7D32","#AEEA00", "#F50057", "#827717"  ]}
+            colorScale={['#880E4F', '#2E7D32','#AEEA00', '#F50057', '#827717'  ]}
             data={[
               { x: `${this.state.travel.foodCost}`, y: 40 },
               { x: `${this.state.travel.hotelCost}`, y: 40 },
@@ -125,11 +125,9 @@ class TravelsShow extends React.Component {
           <h4>divide budget {this.divideBudget()} {this.state.user.homeCurrency}</h4>
           <h4>divide budget {this.divideBudget() * this.state.rate} {this.state.travel.currency}</h4>
           <h4>  {this.newBudget()}</h4>
-          <button className="standard-button">
-            <Link to={`/travels/${this.state.travel.id}/edit`} >
-              Edit
-            </Link>
-          </button>
+          <Link to={`/travels/${this.state.travel._id}/edit`} >
+            Edit
+          </Link>
           <button className="main-button" onClick={this.deleteTravel}>
           delete
           </button>

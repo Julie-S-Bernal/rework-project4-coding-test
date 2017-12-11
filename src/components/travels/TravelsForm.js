@@ -120,16 +120,6 @@ const TravelsFormTrip = ({
           className="form-control"
         />
       </div>
-      <div className="form-group">
-        <TextField
-          type="createdBy"
-          name="createdBy"
-          placeholder=""
-          onChange={handleChange}
-          value={travel.createdBy}
-          className="form-control"
-        />
-      </div>
 
       <Button type="submit" className="btn btn-primary">Submit</Button>
     </form>
