@@ -8,10 +8,6 @@ const CostsForm = ({
   travel
 
 }) => {
-  console.log(handleChange, travel);
-
-
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">

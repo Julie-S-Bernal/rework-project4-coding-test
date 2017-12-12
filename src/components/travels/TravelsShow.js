@@ -7,12 +7,6 @@ import {VictoryChart, VictoryBar, VictoryTheme, VictoryPie} from 'victory';
 import CostsForm from './CostsForm';
 
 // http://formidable.com/open-source/victory/docs/
-const sampleData = [
-  {day: 1, earnings: 200},
-  {day: 2, earnings: 16500},
-  {day: 3, earnings: 14250},
-  {day: 4, earnings: 19000}
-];
 
 
 class TravelsShow extends React.Component {
@@ -32,22 +26,24 @@ class TravelsShow extends React.Component {
 
   getTravelLengthInDays = () => {
     const days = moment(this.state.travel.endTravelDate).diff(moment(this.state.travel.startTravelDate) , 'days');
+
     return days;
   }
+
+
   divideBudget = () => {
-    //the one below gets me the right date, better way to rewritte it?
+
     const days = moment(this.state.travel.endTravelDate).diff(moment(this.state.travel.startTravelDate) , 'days');
-    console.log('divide budget', this.state.travel.budget);
     const result = this.state.travel.budget / days;
     return result;
   }
 
   newBudget =() => {
     const budgetSum = this.state.travel.hotelCost +  this.state.travel.extra + this.state.travel.foodCost + this.state.travel.transportation + this.state.travel.travelCost;
-    console.log('this is', budgetSum);
     return(budgetSum);
 
   }
+
 
   handleChange = ({ target: { name, value } }) => {
     const travel = Object.assign({}, this.state.travel, { [name]: value });
@@ -55,12 +51,14 @@ class TravelsShow extends React.Component {
   }
 
 
+
   handleSubmit = (e) => {
     e.preventDefault();
 
+
     Axios
       .put(`/api/travels/${this.state.travel._id}`, this.state.travel)
-      .then(() => this.props.history.push(`/travels/${this.state.travel._id}`))
+      .then(res => this.setState({ travel: res.data }))
       .catch(err => console.log(err));
   }
 
@@ -100,21 +98,40 @@ class TravelsShow extends React.Component {
 
   render() {
     if (!this.state.travel) return null;
+    //
+    var sum = this.state.travel.foodCostValues.reduce((a, b) => a + b);
+    var avg = sum / this.state.travel.foodCostValues.length;
 
+    var extraSum = this.state.travel.extraCostValues.reduce((a, b) => a + b);
+    var avgExtra = extraSum / this.state.travel.extraCostValues.length;
 
-    console.log('hotel cost', this.state.travel.hotelCost);
+    var transSum = this.state.travel.transportationCostValues.reduce((a, b) => a + b);
+    var avgTrans = transSum / this.state.travel.transportationCostValues.length;
+
+    //
+    const sampleData = [
+      { quarter: 'Average Food Cost', earning: avg },
+      { quarter: 'Initial Food Cost', earning: this.state.travel.foodCostValues[0] },
+      { quarter: 'Average Extra Cost', earning: avgExtra },
+      { quarter: 'Initial Extra cost', earning: this.state.travel.extraCostValues[0] },
+      { quarter: 'Average Transportation Food Cost', earning: avgTrans },
+      { quarter: 'Initial Transportation Food Cost', earning: this.state.travel.transportationCostValues[0] }
+    ];
+
     return(
       <div className="row">
         <div>
           <VictoryChart
             theme={VictoryTheme.material}
             domainPadding={20}
+            style={{ border: { stroke: 'black' }, labels: {fontSize: 10 } }}
           >
             <VictoryBar
-              style={{ data: { fill: '#AEEA00' } }}
+              style={{ data: { fill: '#AEEA00' },labels: {fontSize: 10 } }}
               data={sampleData}
+
               x="quarter"
-              y="earnings"
+              y="earning"
             />
           </VictoryChart>
         </div>
@@ -122,6 +139,7 @@ class TravelsShow extends React.Component {
           <VictoryPie
 
             colorScale={['#880E4F', '#2E7D32','#AEEA00', '#F50057', '#827717'  ]}
+
             data={[
               { x: 'food cost', y: this.state.travel.foodCost, label: `Food ${this.state.travel.foodCost}` },
               { x: 'hotel cost', y: parseInt(this.state.travel.hotelCost), label: `Hotel ${this.state.travel.hotelCost}` },
@@ -161,6 +179,9 @@ class TravelsShow extends React.Component {
           </h4>
           <h4>per day budget {this.divideBudget()} {this.state.user.homeCurrency}</h4>
           <h4>per day budget {this.divideBudget() * this.state.rate} {this.state.travel.currency}</h4>
+          <h4> I AM  THE DIFFERENCE {avg - this.state.travel.foodCostValues[0] }</h4>
+          <h4> I AM  THE DIFFERENCE {avgExtra - this.state.travel.extraCostValues[0] }</h4>
+          <h4> I AM  THE DIFFERENCE {avgTrans  - this.state.travel.transportationCostValues[0] }</h4>
           <CostsForm
             travel={this.state.travel}
             handleChange={this.handleChange}

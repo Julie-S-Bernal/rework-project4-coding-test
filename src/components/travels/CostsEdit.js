@@ -5,7 +5,6 @@ import CostsForm from './CostsForm';
 
 class CostsEdit extends React.Component {
   state = {
-
     travel: {
 
       hotelCost: '',
@@ -28,7 +27,6 @@ class CostsEdit extends React.Component {
   handleChange = ({ target: { name, value } }) => {
     const travel = Object.assign({}, this.state.travel, { [name]: value });
     this.setState({ travel });
-    console.log(travel);
   }
 
 

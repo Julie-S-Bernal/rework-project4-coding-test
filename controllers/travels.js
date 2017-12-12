@@ -39,6 +39,7 @@ function travelsUpdate(req, res, next) {
     .exec()
     .then((travel) => {
       if(!travel) return res.notFound();
+
       travel = Object.assign(travel, req.body);
       return travel.save();
     })
