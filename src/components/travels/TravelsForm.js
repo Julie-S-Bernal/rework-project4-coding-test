@@ -62,11 +62,11 @@ const TravelsFormTrip = ({
           <InputLabel htmlFor="country-name-native">Country</InputLabel>
           <Select
             native
-            value={travel && travel.country}
+            value={travel && travel.country.name}
             onChange={handleChange}
             input={<Input name="country" id="country-name-native" />}
           >
-            { countryList.map(cur => <option  key={cur.image} value={cur.image}>{cur.name}</option>) }
+            { countryList.map(cur => <option  key={cur.image} value={cur.name}>{cur.name}</option>) }
           </Select>
         </FormControl>
       </div>

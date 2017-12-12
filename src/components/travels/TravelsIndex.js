@@ -1,7 +1,6 @@
 import React    from 'react';
 import Axios    from 'axios';
 import { Link } from 'react-router-dom';
-import countryList from '../../lib/countryList';
 
 
 import Auth     from '../../lib/Auth';
@@ -36,7 +35,7 @@ class TravelsIndex extends React.Component {
               <div key={travel._id} >
                 <Link to={`/travels/${travel._id}`}>
                   <h1>{travel.country.name}</h1>
-                  <img src={travel.country.name}></img>
+                  <img src={travel.country.image} />
                 </Link>
               </div>
             );

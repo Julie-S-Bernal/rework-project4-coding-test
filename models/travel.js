@@ -4,8 +4,11 @@ const travelSchema = mongoose.Schema({
   // budget: { type: Number, required: true },
   startTravelDate: { type: String},
   endTravelDate: { type: String},
-  country: { type: String, required: true },
-  currency: { type: String, required: true},
+  country: {
+    name: String,
+    image: String
+  },
+  currency: { type: String},
   hotelCost: { type: Number },
   foodCost: { type: Number},
   foodCostValues: {type: Array, 'default': []},

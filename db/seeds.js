@@ -11,7 +11,10 @@ const travelData = [{
   startTravelDate: '12-24-2017',
   endTravelDate: '06-01-2018',
   travelDuration: '14',
-  country: 'Spain',
+  country: {
+    name: 'Spain',
+    image: 'http://www.globalblue.com/tax-free-shopping/spain/article641258.ece/alternates/LANDSCAPE2_970/Nativity-facade-of-Sagrada-Familia-cathedral-in-Barcelona-spain.jpg'
+  },
   currency: 'EUR',
   hotelCost: '800',
   foodCost: '500',
