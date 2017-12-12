@@ -105,7 +105,7 @@ class TravelsShow extends React.Component {
     console.log('hotel cost', this.state.travel.hotelCost);
     return(
       <div className="row">
-        {/* <div>
+        <div>
           <VictoryChart
             theme={VictoryTheme.material}
             domainPadding={20}
@@ -117,7 +117,7 @@ class TravelsShow extends React.Component {
               y="earnings"
             />
           </VictoryChart>
-        </div> */}
+        </div>
         <div>
           <VictoryPie
 
