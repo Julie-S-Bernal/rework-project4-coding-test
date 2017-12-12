@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const travelSchema = mongoose.Schema({
-  budget: { type: Number, required: true },
+  // budget: { type: Number, required: true },
   startTravelDate: { type: String},
   endTravelDate: { type: String},
   country: { type: String, required: true },

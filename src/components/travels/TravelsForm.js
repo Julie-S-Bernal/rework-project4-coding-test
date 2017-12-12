@@ -18,7 +18,7 @@ const TravelsFormTrip = ({
 }) => {
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-group">
+      {/* <div className="form-group">
         <TextField
           type="text"
           label="Budget"
@@ -27,8 +27,8 @@ const TravelsFormTrip = ({
           onChange={handleChange}
           value={travel.budget}
           className="form-control"
-        />
-      </div>
+        /> */}
+      {/* </div> */}
       <div className="form-group">
         <DatePicker
           onChange={handleStartDateChange}

@@ -32,16 +32,15 @@ class TravelsShow extends React.Component {
 
 
   divideBudget = () => {
-
     const days = moment(this.state.travel.endTravelDate).diff(moment(this.state.travel.startTravelDate) , 'days');
-    const result = this.state.travel.budget / days;
+    const result = this.state.travel.budgetSum / days;
+    console.log(result);
     return result;
   }
 
   newBudget =() => {
     const budgetSum = this.state.travel.hotelCost +  this.state.travel.extra + this.state.travel.foodCost + this.state.travel.transportation + this.state.travel.travelCost;
     return(budgetSum);
-
   }
 
 
