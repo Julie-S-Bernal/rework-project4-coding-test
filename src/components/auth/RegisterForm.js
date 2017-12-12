@@ -34,7 +34,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
         />
       </div>
       <div className="form-group">
-        <textField
+        <TextField
           type="text"
           name="email"
           placeholder="Email"

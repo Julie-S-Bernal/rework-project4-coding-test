@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 export default _.sortBy([
-  {name: 'Afghanistan', image: 'https://lh5.googleusercontent.com/ZrTyVmyNyfVhQ2fMe9hDVZByebBhqA1kFfeONPK9bFlM_pusq22J-AjdSU_fWw3Hl_OiC3GeA3zIzX3ymE75h7CrpUwU-qqcR06ZyqtX-Rjg-JBeknA8rgNk'},
+  {image: 'https://lh5.googleusercontent.com/ZrTyVmyNyfVhQ2fMe9hDVZByebBhqA1kFfeONPK9bFlM_pusq22J-AjdSU_fWw3Hl_OiC3GeA3zIzX3ymE75h7CrpUwU-qqcR06ZyqtX-Rjg-JBeknA8rgNk',name: 'Afghanistan'},
   {name: 'Åland Islands', image: 'https://keyassets.timeincuk.net/inspirewp/live/wp-content/uploads/sites/21/2015/06/A7WGK8-for-web.jpg'},
   {name: 'Albania', image: 'http://albania.al/Images/Resized/ir3qsxdg58036eb4dc357_2400_1400_C_75.jpg'},
   {name: 'Algeria', image: 'https://i.ytimg.com/vi/0Y-0CYg_oIA/maxresdefault.jpg'},

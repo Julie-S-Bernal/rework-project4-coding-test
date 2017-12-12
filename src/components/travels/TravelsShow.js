@@ -6,6 +6,8 @@ import moment from 'moment';
 import {VictoryChart, VictoryBar, VictoryTheme, VictoryPie} from 'victory';
 import CostsForm from './CostsForm';
 
+import BackButton from '../utility/BackButton';
+
 // http://formidable.com/open-source/victory/docs/
 
 
@@ -53,18 +55,14 @@ class TravelsShow extends React.Component {
     this.setState({ travel: travel });
   }
 
-
-
   handleSubmit = (e) => {
     e.preventDefault();
-
 
     Axios
       .put(`/api/travels/${this.state.travel._id}`, this.state.travel)
       .then(res => this.setState({ travel: res.data }))
       .catch(err => console.log(err));
   }
-
 
   componentDidMount() {
     const userMeta = Auth.getPayload();
@@ -196,6 +194,7 @@ class TravelsShow extends React.Component {
           <button className="main-button" onClick={this.deleteTravel}>
           delete
           </button>
+          <BackButton />
         </div>
       </div>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import currencyList from '../../lib/currencyList';
+import countryList from '../../lib/countryList';
 import {TextField} from 'material-ui';
 import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
@@ -7,6 +8,7 @@ import Input, { InputLabel } from 'material-ui/Input';
 import Button from 'material-ui/Button';
 import { DatePicker } from 'material-ui-pickers';
 import {ArrowBack, ArrowForward}  from 'material-ui-icons';
+import BackButton from '../utility/BackButton';
 
 
 const TravelsFormTrip = ({
@@ -48,21 +50,32 @@ const TravelsFormTrip = ({
         />
       </div>
       <div className="form-group">
-        <TextField
+        {/* <TextField
           type="text"
           name="country"
           placeholder="Country"
           onChange={handleChange}
           value={travel.country}
           className="form-control"
-        />
+        /> */}
+        <FormControl>
+          <InputLabel htmlFor="country-name-native">Country</InputLabel>
+          <Select
+            native
+            value={travel && travel.country}
+            onChange={handleChange}
+            input={<Input name="country" id="country-name-native" />}
+          >
+            { countryList.map(cur => <option  key={cur.image} value={cur.image}>{cur.name}</option>) }
+          </Select>
+        </FormControl>
       </div>
       <div className="form-group">
         <FormControl>
           <InputLabel htmlFor="currency-code-native">Currency</InputLabel>
           <Select
             native
-            value={travel.currency}
+            value={travel && travel.currency}
             onChange={handleChange}
             input={<Input name="currency" id="currency-code-native" />}
           >
@@ -122,7 +135,10 @@ const TravelsFormTrip = ({
       </div>
 
       <Button type="submit" className="btn btn-primary">Submit</Button>
+      <BackButton />
     </form>
+
+
   );
 };
 

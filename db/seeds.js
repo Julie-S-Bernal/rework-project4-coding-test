@@ -47,7 +47,7 @@ mongoose
   .then(travels => console.log(`${travels.length} travel created!`))
   .then(() => User.create(userData))
   .then(users => console.log(`${users.length} users created!`))
-  // .then(() => Image.create(imageData))
-  // .then(images => console.log(`${images.length} images created!`))
+  .then(() => Image.create(imageData))
+  .then(images => console.log(`${images.length} images created!`))
   .catch(err => console.log(err))
   .finally(() => mongoose.connection.close());
