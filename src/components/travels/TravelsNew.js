@@ -29,27 +29,17 @@ class TravelsNew extends React.Component {
       value = countryList.find(country => country.name === value);
     }
     const travel = Object.assign({}, this.state.travel, { [name]: value });
-    this.setState({ travel });
+    this.setState({ travel }, () => console.log(this.state.travel));
   }
 
   handleStartDateChange = (selectedDate) => {
-    this.setState({
-      ...this.state,
-      travel: {
-        ...this.travel,
-        startTravelDate: selectedDate
-      }
-    });
+    const travel = Object.assign({}, this.state.travel, { startTravelDate: selectedDate });
+    this.setState({ travel }, () => console.log(this.state.travel));
   };
 
   handleEndDateChange = (selectedDate) => {
-    this.setState({
-      ...this.state,
-      travel: {
-        ...this.travel,
-        endTravelDate: selectedDate
-      }
-    });
+    const travel = Object.assign({}, this.state.travel, { endTravelDate: selectedDate });
+    this.setState({ travel }, () => console.log(this.state.travel));
   };
 
   handleSubmit = (e) => {

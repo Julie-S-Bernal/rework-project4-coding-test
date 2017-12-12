@@ -169,7 +169,7 @@ class TravelsShow extends React.Component {
         </div>
         <div className="col-md-6">
 
-          <h3> Country name:{ this.state.travel.country}</h3>
+          <h3> Country name:{ this.state.travel.country.name}</h3>
           <h4>start date:{ moment(this.state.travel.startTravelDate).format('YYYY MM DD') }</h4>
           <h4>end date:{ moment(this.state.travel.endTravelDate).format('YYYY MM DD') }</h4>
           <h4>total budget in user currency: { this.newBudget()} {this.state.user.homeCurrency}</h4>

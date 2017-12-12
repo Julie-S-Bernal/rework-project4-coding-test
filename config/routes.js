@@ -20,10 +20,10 @@ router.route('/register')
 router.route('/login')
   .post(auth.login);
 
-// router.route('/user')
-//   .get(secureRoute, users);
+// router.route('/users/:id')
+//   .get(secureRoute, users.show);
 
-router.route('/user/:id')
+router.route('/users/:id')
   .get(users.show);
 
 router.all('/*', (req, res) => res.notFound());

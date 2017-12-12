@@ -18,6 +18,13 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema
+  .virtual('travels', {
+    ref: 'Travel',
+    localField: '_id',
+    foreignField: 'createdBy'
+  });
+
+userSchema
   .virtual('passwordConfirmation')
   .set(function setPasswordConfirmation(passwordConfirmation) {
     this._passwordConfirmation = passwordConfirmation;

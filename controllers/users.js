@@ -4,6 +4,7 @@ const User = require('../models/user');
 function usersShow(req, res, next) {
   User
     .findById(req.params.id)
+    .populate('travels')
     .exec()
     .then((user) => {
       if(!user) return res.notFound();

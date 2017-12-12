@@ -12,8 +12,8 @@ class TravelsIndex extends React.Component {
 
   componentWillMount() {
     Axios
-      .get('/api/travels')
-      .then(res => this.setState({ travels: res.data }))
+      .get(`/api/users/${Auth.getPayload().userId}`)
+      .then(res => this.setState({ travels: res.data.travels }))
       .catch(err => console.log(err));
   }
 

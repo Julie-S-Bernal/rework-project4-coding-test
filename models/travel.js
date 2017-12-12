@@ -17,7 +17,7 @@ const travelSchema = mongoose.Schema({
   travelCost: {type: Number},
   transportation: { type: Number},
   transportationCostValues: {type: Array, 'default': []},
-  createdBy: {type: String}
+  createdBy: { type: mongoose.Schema.ObjectId, ref: 'User' }
 }, {
   timestamps: true
 });

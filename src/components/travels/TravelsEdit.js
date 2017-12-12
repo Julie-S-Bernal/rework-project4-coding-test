@@ -3,6 +3,7 @@ import React from 'react';
 import Axios from 'axios';
 
 import TravelsForm from './TravelsForm';
+import countryList from '../../lib/countryList';
 
 class TravelsEdit extends React.Component {
   state = {
@@ -11,7 +12,10 @@ class TravelsEdit extends React.Component {
       budget: 0,
       startTravelDate: '',
       endTravelDate: '',
-      country: 'USA',
+      country: {
+        name: '',
+        image: ''
+      },
       foodCostValues: [],
       travelCostValues: [],
       transportationCostValues: [],
@@ -32,6 +36,10 @@ class TravelsEdit extends React.Component {
   }
 
   handleChange = ({ target: { name, value } }) => {
+
+    if(name === 'country') {
+      value = countryList.find(country => country.name === value);
+    }
     const travel = Object.assign({}, this.state.travel, { [name]: value });
     this.setState({ travel });
   }
