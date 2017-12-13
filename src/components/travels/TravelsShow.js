@@ -5,6 +5,7 @@ import Auth from '../../lib/Auth';
 import moment from 'moment';
 import {VictoryChart, VictoryBar, VictoryTheme, VictoryPie} from 'victory';
 import CostsForm from './CostsForm';
+import LiveRates from './LiveRates';
 
 import BackButton from '../utility/BackButton';
 
@@ -16,7 +17,8 @@ class TravelsShow extends React.Component {
   state = {
     travel: null,
     rate: 1,
-    user: {}
+    user: {},
+    convertingMoney: ''
   }
 
   deleteTravel = () => {
@@ -27,25 +29,29 @@ class TravelsShow extends React.Component {
   }
 
   getTravelLengthInDays = () => {
+    console.log('getTravelLengthInDays IS CALLED');
+    console.log(this.state.travel.endTravelDate);
+    console.log(this.state.travel.startTravelDate);
     const days = moment(this.state.travel.endTravelDate).diff(moment(this.state.travel.startTravelDate) , 'days');
-
+    console.log('DAYS IN getTravelLengthInDays', days);
     return days;
   }
 
 
   divideBudget = () => {
-    const days = moment(this.state.travel.endTravelDate).diff(moment(this.state.travel.startTravelDate) , 'days');
-    const result =this.newBudget() / days;
-    console.log(result);
+    console.log('DIVIDE BUDGET IS CALLED');
+    const result = this.newBudget() / this.getTravelLengthInDays();
+    console.log('result in divideBudget', result);
     return result;
   }
 
-  newBudget =() => {
+  newBudget = () => {
+    console.log('NEWBUDGET HAS BEEN CALLED');
     const budgetSum = this.state.travel.hotelCost +  this.state.travel.extra + this.state.travel.foodCost + this.state.travel.transportation + this.state.travel.travelCost;
-
-    const days = moment(this.state.travel.endTravelDate).diff(moment(this.state.travel.startTravelDate) , 'days');
-    const result = this.state.travel.budgetSum / days;
-    console.log(result);
+    console.log('BUDGETSUM ---> ', budgetSum);
+    // const days = moment(this.state.travel.endTravelDate).diff(moment(this.state.travel.startTravelDate) , 'days');
+    // const result = this.state.travel.budgetSum / days;
+    // console.log('RESULT IN NEWBUDGET', result);
     return budgetSum;
   }
 
@@ -64,35 +70,49 @@ class TravelsShow extends React.Component {
       .catch(err => console.log(err));
   }
 
+  handleExchangeChange = (e) => {
+    this.setState({ convertingMoney: e.target.value });
+  }
+
+  handleExchangeSubmit = (e) => {
+    e.preventDefault();
+    const rate = this.state.convertingMoney * this.state.rate;
+    this.setState({ convertedMoney: rate, convertingMoney: '' });
+  }
+
+
   componentDidMount() {
+    console.log('componentDidMount');
     const userMeta = Auth.getPayload();
 
     Axios.all([
       Axios.get(`/api/travels/${this.props.match.params.id}`),
-      Axios.get(`/api/user/${userMeta.userId}`)
+      Axios.get(`/api/users/${userMeta.userId}`)
     ]).then(
       Axios.spread( (travel, user) => {
         this.setState({
           ...this.state,
           travel: travel.data,
           user: user.data
+        }, () => {
+          Axios.get(
+            'https://www.alphavantage.co/query', {
+              params: {
+                function: 'CURRENCY_EXCHANGE_RATE',
+                from_currency: this.state.user.homeCurrency, //this.props.user.currency,
+                to_currency: this.state.travel.currency,//this.props.travel.currency,
+                apikey: 'USD&OZZ3948H22SG8ADG'
+              }
+            }
+          ).then(
+            response => {
+              const rate = response.data['Realtime Currency Exchange Rate']['5. Exchange Rate'];
+              this.setState({...this.state, rate});
+            })
+            .catch(err => console.log(err));
         });
 
-        Axios.get(
-          'https://www.alphavantage.co/query', {
-            params: {
-              function: 'CURRENCY_EXCHANGE_RATE',
-              from_currency: this.state.user.homeCurrency, //this.props.user.currency,
-              to_currency: this.state.travel.currency,//this.props.travel.currency,
-              apikey: 'USD&OZZ3948H22SG8ADG'
-            }
-          }
-        ).then(
-          response => {
-            const rate = response.data['Realtime Currency Exchange Rate']['5. Exchange Rate'];
-            this.setState({...this.state, rate});
-          })
-          .catch(err => console.log(err));
+
       }))
       .catch(err => console.log(err));
   }
@@ -118,7 +138,6 @@ class TravelsShow extends React.Component {
       { quarter: 'Average Transportation Food Cost', earning: avgTrans },
       { quarter: 'Initial Transportation Food Cost', earning: this.state.travel.transportationCostValues[0] }
     ];
-
     return(
       <div className="row">
         <div>
@@ -169,10 +188,9 @@ class TravelsShow extends React.Component {
         </div>
         <div className="col-md-6">
 
-          <h3> Country name:{ this.state.travel.country.name}</h3>
+          <h3>Country name:{ this.state.travel.country.name}</h3>
           <h4>start date:{ moment(this.state.travel.startTravelDate).format('YYYY MM DD') }</h4>
           <h4>end date:{ moment(this.state.travel.endTravelDate).format('YYYY MM DD') }</h4>
-          <h4>total budget in user currency: { this.newBudget()} {this.state.user.homeCurrency}</h4>
           <h4>total budget multiplied by exchanged rate:{ this.newBudget() * this.state.rate } {this.state.travel.currency}</h4>
 
           <h4>
@@ -188,6 +206,12 @@ class TravelsShow extends React.Component {
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
           />
+          <LiveRates
+            convertingMoney={this.state.convertingMoney}
+            handleExchangeChange={this.handleExchangeChange}
+            handleExchangeSubmit={this.handleExchangeSubmit}
+          />
+          <p>{ this.state.convertedMoney }</p>
           <Link to={`/travels/${this.state.travel._id}/edit`} >
             Edit
           </Link>

@@ -48,8 +48,8 @@ class TravelsNew extends React.Component {
     Axios
       .post('/api/travels', {
         ...this.state.travel,
-        startTravelDate: this.state.travel.startTravelDate,
-        endTravelDate: this.state.travel.endTravelDate
+        startTravelDate: new Date(this.state.travel.startTravelDate),
+        endTravelDate: new Date(this.state.travel.endTravelDate)
       }, {
         headers: { Authorization: `Bearer ${Auth.getToken()}`}
       })

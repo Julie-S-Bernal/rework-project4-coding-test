@@ -32,8 +32,8 @@ class TravelsIndex extends React.Component {
           </div>
           {this.state.travels.map(travel => {
             return(
-              <div key={travel._id} >
-                <Link to={`/travels/${travel._id}`}>
+              <div key={travel.id} >
+                <Link to={`/travels/${travel.id}`}>
                   <h1>{travel.country.name}</h1>
                   <img src={travel.country.image} />
                 </Link>

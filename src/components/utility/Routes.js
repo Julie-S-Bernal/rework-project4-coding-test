@@ -16,7 +16,7 @@ const Routes = () => {
     <Switch>
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
-      <Route exact path="/" component={TravelsIndex} />
+      <ProtectedRoute exact path="/" component={TravelsIndex} />
       <ProtectedRoute path="/travels/new" component={TravelsNew} />
       <ProtectedRoute path="/travels/:id/edit" component={TravelsEdit} />
       <Route path="/travels/:id" component={TravelsShow} />
