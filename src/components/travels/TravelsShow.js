@@ -11,7 +11,6 @@ import BackButton from '../utility/BackButton';
 
 // http://formidable.com/open-source/victory/docs/
 
-
 class TravelsShow extends React.Component {
 
   state = {
@@ -29,32 +28,16 @@ class TravelsShow extends React.Component {
   }
 
   getTravelLengthInDays = () => {
-    console.log('getTravelLengthInDays IS CALLED');
-    console.log(this.state.travel.endTravelDate);
-    console.log(this.state.travel.startTravelDate);
     const days = moment(this.state.travel.endTravelDate).diff(moment(this.state.travel.startTravelDate) , 'days');
-    console.log('DAYS IN getTravelLengthInDays', days);
     return days;
   }
 
-
-  divideBudget = () => {
-    console.log('DIVIDE BUDGET IS CALLED');
-    const result = this.newBudget() / this.getTravelLengthInDays();
-    console.log('result in divideBudget', result);
-    return result;
-  }
-
   newBudget = () => {
-    console.log('NEWBUDGET HAS BEEN CALLED');
     const budgetSum = this.state.travel.hotelCost +  this.state.travel.extra + this.state.travel.foodCost + this.state.travel.transportation + this.state.travel.travelCost;
-    console.log('BUDGETSUM ---> ', budgetSum);
-    // const days = moment(this.state.travel.endTravelDate).diff(moment(this.state.travel.startTravelDate) , 'days');
-    // const result = this.state.travel.budgetSum / days;
-    // console.log('RESULT IN NEWBUDGET', result);
+    const days = this.getTravelLengthInDays();
+    this.setState({ totBudgetWithRate: budgetSum * this.state.rate, homeBudget: budgetSum, travelLength: days });
     return budgetSum;
   }
-
 
   handleChange = ({ target: { name, value } }) => {
     const travel = Object.assign({}, this.state.travel, { [name]: value });
@@ -65,7 +48,7 @@ class TravelsShow extends React.Component {
     e.preventDefault();
 
     Axios
-      .put(`/api/travels/${this.state.travel._id}`, this.state.travel)
+      .put(`/api/travels/${this.state.travel.id}`, this.state.travel)
       .then(res => this.setState({ travel: res.data }))
       .catch(err => console.log(err));
   }
@@ -82,7 +65,6 @@ class TravelsShow extends React.Component {
 
 
   componentDidMount() {
-    console.log('componentDidMount');
     const userMeta = Auth.getPayload();
 
     Axios.all([
@@ -107,7 +89,7 @@ class TravelsShow extends React.Component {
           ).then(
             response => {
               const rate = response.data['Realtime Currency Exchange Rate']['5. Exchange Rate'];
-              this.setState({...this.state, rate});
+              this.setState({ ...this.state, rate }, () => this.newBudget());
             })
             .catch(err => console.log(err));
         });
@@ -161,11 +143,11 @@ class TravelsShow extends React.Component {
             colorScale={['#880E4F', '#2E7D32','#AEEA00', '#F50057', '#827717'  ]}
 
             data={[
-              { x: 'food cost', y: this.state.travel.foodCost, label: `Food ${this.state.travel.foodCost}` },
+              { x: 'food cost', y: parseInt(this.state.travel.foodCost), label: `Food ${this.state.travel.foodCost}` },
               { x: 'hotel cost', y: parseInt(this.state.travel.hotelCost), label: `Hotel ${this.state.travel.hotelCost}` },
-              { x: 'extra', y: this.state.travel.extra, label: `Extra ${this.state.travel.extra}`},
-              { x: 'travel cost', y: this.state.travel.travelCost, label: `Travel  ${this.state.travel.travelCost}`},
-              { x: 'transportation', y: this.state.travel.transportation, label: `Transportation ${this.state.travel.transportation}` }
+              { x: 'extra', y: parseInt(this.state.travel.extra), label: `Extra ${this.state.travel.extra}`},
+              { x: 'travel cost', y: parseInt(this.state.travel.travelCost), label: `Travel  ${this.state.travel.travelCost}`},
+              { x: 'transportation', y: parseInt(this.state.travel.transportation), label: `Transportation ${this.state.travel.transportation}` }
             ]}
             events={[
               {
@@ -191,13 +173,14 @@ class TravelsShow extends React.Component {
           <h3>Country name:{ this.state.travel.country.name}</h3>
           <h4>start date:{ moment(this.state.travel.startTravelDate).format('YYYY MM DD') }</h4>
           <h4>end date:{ moment(this.state.travel.endTravelDate).format('YYYY MM DD') }</h4>
-          <h4>total budget multiplied by exchanged rate:{ this.newBudget() * this.state.rate } {this.state.travel.currency}</h4>
-
-          <h4>
-            length of travel: {this.getTravelLengthInDays()}
-          </h4>
-          <h4>per day budget {this.divideBudget()} {this.state.user.homeCurrency}</h4>
-          <h4>per day budget {this.divideBudget() * this.state.rate} {this.state.travel.currency}</h4>
+          { !this.state.homeBudget && <p>LOADING....</p>}
+          { this.state.homeBudget && [
+            <h4 key={1}>total budget without exchanged rate:{ this.state.homeBudget } {this.state.user.homeCurrency}</h4>,
+            <h4 key={2}>total budget multiplied by exchanged rate:{ parseFloat((this.state.totBudgetWithRate).toFixed(2)) } {this.state.travel.currency}</h4>,
+            <h4 key={3}>length of travel: {this.state.travelLength}</h4>,
+            <h4 key={4}>per day budget home {this.state.homeBudget / this.state.travelLength } {this.state.user.homeCurrency}</h4>,
+            <h4 key={5}>per day budget exchanged { parseFloat((this.state.totBudgetWithRate / this.state.travelLength).toFixed(2)) } {this.state.travel.currency}</h4>
+          ]}
           <h4> I AM  THE DIFFERENCE {avg - this.state.travel.foodCostValues[0] }</h4>
           <h4> I AM  THE DIFFERENCE {avgExtra - this.state.travel.extraCostValues[0] }</h4>
           <h4> I AM  THE DIFFERENCE {avgTrans  - this.state.travel.transportationCostValues[0] }</h4>
@@ -212,7 +195,7 @@ class TravelsShow extends React.Component {
             handleExchangeSubmit={this.handleExchangeSubmit}
           />
           <p>{ this.state.convertedMoney }</p>
-          <Link to={`/travels/${this.state.travel._id}/edit`} >
+          <Link to={`/travels/${this.state.travel.id}/edit`} >
             Edit
           </Link>
           <button className="main-button" onClick={this.deleteTravel}>
