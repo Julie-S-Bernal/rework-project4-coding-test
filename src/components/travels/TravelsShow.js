@@ -1,13 +1,29 @@
 import React    from 'react';
 import Axios    from 'axios';
-import { Link } from 'react-router-dom';
 import Auth from '../../lib/Auth';
 import moment from 'moment';
 import {VictoryChart, VictoryBar, VictoryTheme, VictoryPie} from 'victory';
 import CostsForm from './CostsForm';
 import LiveRates from './LiveRates';
-
+// import Grid from './ShowLayout'
+import ShowLayout from '../utility/ShowLayout';
 import BackButton from '../utility/BackButton';
+
+import Button from 'material-ui/Button';
+
+import { withStyles } from 'material-ui/styles';
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    marginTop: 30
+  },
+  paper: {
+    padding: 16,
+    textAlign: 'center',
+    color: theme.palette.text.secondary
+  }
+});
 
 // http://formidable.com/open-source/victory/docs/
 
@@ -63,7 +79,6 @@ class TravelsShow extends React.Component {
     this.setState({ convertedMoney: rate, convertingMoney: '' });
   }
 
-
   componentDidMount() {
     const userMeta = Auth.getPayload();
 
@@ -93,8 +108,6 @@ class TravelsShow extends React.Component {
             })
             .catch(err => console.log(err));
         });
-
-
       }))
       .catch(err => console.log(err));
   }
@@ -120,92 +133,101 @@ class TravelsShow extends React.Component {
       { quarter: 'Average Transportation Food Cost', earning: avgTrans },
       { quarter: 'Initial Transportation Food Cost', earning: this.state.travel.transportationCostValues[0] }
     ];
-    return(
-      <div className="row">
-        <div>
-          <VictoryChart
-            theme={VictoryTheme.material}
-            domainPadding={20}
-            style={{ border: { stroke: 'black' }, labels: {fontSize: 10 } }}
-          >
-            <VictoryBar
-              style={{ data: { fill: '#AEEA00' },labels: {fontSize: 10 } }}
-              data={sampleData}
 
-              x="quarter"
-              y="earning"
-            />
-          </VictoryChart>
-        </div>
-        <div>
-          <VictoryPie
+    const chart1 = <VictoryChart
+      theme={VictoryTheme.material}
+      domainPadding={20}
+      style={{ border: { stroke: 'black' }, labels: {fontSize: 10 } }}
+    >
+      <VictoryBar
+        style={{ data: { fill: '#FF9800' },labels: {fontSize: 10 } }}
+        data={sampleData}
 
-            colorScale={['#880E4F', '#2E7D32','#AEEA00', '#F50057', '#827717'  ]}
+        x="quarter"
+        y="earning"
+      />
+    </VictoryChart>;
 
-            data={[
-              { x: 'food cost', y: parseInt(this.state.travel.foodCost), label: `Food ${this.state.travel.foodCost}` },
-              { x: 'hotel cost', y: parseInt(this.state.travel.hotelCost), label: `Hotel ${this.state.travel.hotelCost}` },
-              { x: 'extra', y: parseInt(this.state.travel.extra), label: `Extra ${this.state.travel.extra}`},
-              { x: 'travel cost', y: parseInt(this.state.travel.travelCost), label: `Travel  ${this.state.travel.travelCost}`},
-              { x: 'transportation', y: parseInt(this.state.travel.transportation), label: `Transportation ${this.state.travel.transportation}` }
-            ]}
-            events={[
-              {
-                target: 'data',
-                eventHandlers: {
-                  onClick: () => {
+    const chart2 = <VictoryPie
+      colorScale={['#FFA000','#42A5F5', '#D81B60', '#00BCD4', '#0D47A1'  ]}
 
-                    return [{
-                      target: 'labels',
-                      mutation: (props) => {
-                        return props.text === 'clicked' ?
-                          null : { text: 'clicked' };
-                      }
-                    }];
-                  }
+      data={[
+        { x: 'food cost', y: parseInt(this.state.travel.foodCost), label: `Food ${this.state.travel.foodCost}` },
+        { x: 'hotel cost', y: parseInt(this.state.travel.hotelCost), label: `Hotel ${this.state.travel.hotelCost}` },
+        { x: 'extra', y: parseInt(this.state.travel.extra), label: `Extra ${this.state.travel.extra}`},
+        { x: 'travel cost', y: parseInt(this.state.travel.travelCost), label: `Travel  ${this.state.travel.travelCost}`},
+        { x: 'transportation', y: parseInt(this.state.travel.transportation), label: `Transportation ${this.state.travel.transportation}` }
+      ]}
+      events={[
+        {
+          target: 'data',
+          eventHandlers: {
+            onClick: () => {
+
+              return [{
+                target: 'labels',
+                mutation: (props) => {
+                  return props.text === 'clicked' ? null : { text: 'clicked' };
                 }
-              }
-            ]}
-          />
-        </div>
-        <div className="col-md-6">
+              }];
+            }
+          }
+        }
+      ]}
+    />;
+    const countryName = <h3>{ this.state.travel.country.name}</h3>;
+    const startDate = <h4>Start date: { moment(this.state.travel.startTravelDate).format('YYYY MM DD') }</h4>;
+    const endDate = <h4>End date: { moment(this.state.travel.endTravelDate).format('YYYY MM DD') }</h4>;
+    // const data =
+    const diffFood = <h4> Food spending difference: { parseFloat((avg - this.state.travel.foodCostValues[0] ).toFixed(2)) }</h4>;
+    const diffExtra = <h4> Extra spending difference: {parseFloat((avgExtra - this.state.travel.extraCostValues[0]).toFixed(2)) }</h4>;
+    const diffBus = <h4> Transportation difference: {parseFloat((avgTrans  - this.state.travel.transportationCostValues[0]).toFixed(2)) }</h4>;
+    const form = <CostsForm
+      travel={this.state.travel}
+      handleChange={this.handleChange}
+      handleSubmit={this.handleSubmit}
+    />;
+    const liveRates   =   <LiveRates
+      convertingMoney={this.state.convertingMoney}
+      handleExchangeChange={this.handleExchangeChange}
+      handleExchangeSubmit={this.handleExchangeSubmit}
+    />;
+    const converted =  <p>{ this.state.convertedMoney }</p>;
+    const edit= <Button raised className={this.props.classes.button} onClick={() => this.props.history.push(`/travels/${this.state.travel.id}/edit`)} > Edit </Button>;
+    const erase = <Button raised className={this.props.classes.button} onClick={this.deleteTravel}>Delete</Button>;
+    const back =  <BackButton />;
+    const totals = !this.state.homeBudget
+      ?
+      <p>LOADING....</p>
+      :
+      [
+        <h4 key={1}>total budget without exchanged rate:{ this.state.homeBudget } {this.state.user.homeCurrency}</h4>,
+        <h4 key={2}>total budget multiplied by exchanged rate:{ parseFloat((this.state.totBudgetWithRate).toFixed(2)) } {this.state.travel.currency}</h4>,
+        <h4 key={3}>length of travel: {this.state.travelLength}</h4>,
+        <h4 key={4}>per day budget home {this.state.homeBudget / this.state.travelLength } {this.state.user.homeCurrency}</h4>,
+        <h4 key={5}>per day budget exchanged { parseFloat((this.state.totBudgetWithRate / this.state.travelLength).toFixed(2)) } {this.state.travel.currency}</h4>
+      ];
 
-          <h3>Country name:{ this.state.travel.country.name}</h3>
-          <h4>start date:{ moment(this.state.travel.startTravelDate).format('YYYY MM DD') }</h4>
-          <h4>end date:{ moment(this.state.travel.endTravelDate).format('YYYY MM DD') }</h4>
-          { !this.state.homeBudget && <p>LOADING....</p>}
-          { this.state.homeBudget && [
-            <h4 key={1}>total budget without exchanged rate:{ this.state.homeBudget } {this.state.user.homeCurrency}</h4>,
-            <h4 key={2}>total budget multiplied by exchanged rate:{ parseFloat((this.state.totBudgetWithRate).toFixed(2)) } {this.state.travel.currency}</h4>,
-            <h4 key={3}>length of travel: {this.state.travelLength}</h4>,
-            <h4 key={4}>per day budget home {this.state.homeBudget / this.state.travelLength } {this.state.user.homeCurrency}</h4>,
-            <h4 key={5}>per day budget exchanged { parseFloat((this.state.totBudgetWithRate / this.state.travelLength).toFixed(2)) } {this.state.travel.currency}</h4>
-          ]}
-          <h4> I AM  THE DIFFERENCE {avg - this.state.travel.foodCostValues[0] }</h4>
-          <h4> I AM  THE DIFFERENCE {avgExtra - this.state.travel.extraCostValues[0] }</h4>
-          <h4> I AM  THE DIFFERENCE {avgTrans  - this.state.travel.transportationCostValues[0] }</h4>
-          <CostsForm
-            travel={this.state.travel}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-          />
-          <LiveRates
-            convertingMoney={this.state.convertingMoney}
-            handleExchangeChange={this.handleExchangeChange}
-            handleExchangeSubmit={this.handleExchangeSubmit}
-          />
-          <p>{ this.state.convertedMoney }</p>
-          <Link to={`/travels/${this.state.travel.id}/edit`} >
-            Edit
-          </Link>
-          <button className="main-button" onClick={this.deleteTravel}>
-          delete
-          </button>
-          <BackButton />
-        </div>
-      </div>
+    return(
+      <ShowLayout
+        chart1={chart1}
+        chart2={chart2}
+        countryName={countryName}
+        startDate ={startDate}
+        endDate = {endDate}
+        diffFood = {diffFood}
+        diffExtra = {diffExtra}
+        diffBus = {diffBus}
+        form = {form}
+        liveRates = {liveRates}
+        converted = {converted}
+        edit = {edit}
+        erase ={erase}
+        back ={back}
+        totals={totals}
+      />
     );
   }
 }
 
-export default TravelsShow;
+export default withStyles(styles)(TravelsShow);

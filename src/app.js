@@ -1,13 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import Navbar from './components/utility/Navbar';
-
-
 import Routes from './components/utility/Routes';
 
-const theme = createMuiTheme({});
+import Navbar from './components/utility/Navbar';
+
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import deepPurple from 'material-ui/colors/deepPurple';
+import green from 'material-ui/colors/green';
+import red from 'material-ui/colors/red';
+// import Button from 'material-ui/Button';
+import './scss/style.scss';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      ...deepPurple,
+          A700: '#6200EA'
+    },// Purple and green play nicely together.
+    secondary: {
+      ...green,
+      A400: '#00e677'
+    },
+    error: red
+  }
+});
 
 class App extends React.Component {
 

@@ -8,7 +8,7 @@ import countryList from '../../lib/countryList';
 class TravelsNew extends React.Component {
   state = {
     travel: {
-      budget: 0,
+      budget: '',
       startTravelDate: moment(),
       endTravelDate: moment(),
       country: {
@@ -16,12 +16,14 @@ class TravelsNew extends React.Component {
         image: ''
       },
       currency: '',
-      hotelCost: 0,
-      travelCost: 0,
-      extra: 0,
-      foodCost: 0,
-      transportation: 0
-    }
+      hotelCost: '',
+      travelCost: '',
+      extra: '',
+      foodCost: '',
+      transportation: ''
+    },
+    errors: {}
+
   }
 
   handleChange = ({ target: { name, value }}) => {
@@ -54,7 +56,7 @@ class TravelsNew extends React.Component {
         headers: { Authorization: `Bearer ${Auth.getToken()}`}
       })
       .then(() => this.props.history.push('/'))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.response.data.errors));
   }
 
   render() {
@@ -64,7 +66,8 @@ class TravelsNew extends React.Component {
         handleChange={ this.handleChange }
         handleStartDateChange={ this.handleStartDateChange }
         handleEndDateChange={ this.handleEndDateChange}
-        travel={ this.state.travel }
+        travel= { this.state.travel }
+        errors = {this.state.errors}
       />
     );
   }

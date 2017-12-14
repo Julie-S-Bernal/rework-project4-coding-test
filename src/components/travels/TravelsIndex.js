@@ -1,9 +1,9 @@
 import React    from 'react';
 import Axios    from 'axios';
 import { Link } from 'react-router-dom';
+import Card from '../utility/Card';
+import Auth from '../../lib/Auth';
 
-
-import Auth     from '../../lib/Auth';
 
 class TravelsIndex extends React.Component {
   state = {
@@ -17,27 +17,28 @@ class TravelsIndex extends React.Component {
       .catch(err => console.log(err));
   }
 
+  data = {
+    image: 'http://fillmurray.com/300/300'
+  }
+
   render() {
+
     return (
       <div>
         <div className="row">
           <h1> WELCOME BACK</h1>
+
           <div className="page-banner col-md-12">
-            <button className="main-button">
-              { Auth.isAuthenticated() && <Link to="/travels/new" className="main-button">
-                <h1>Create new travel</h1>
-              </Link>}{ Auth.isAuthenticated() && <Link to="/travels/form" className="main-button">
-              </Link>}
-            </button>
+            { Auth.isAuthenticated() && <Link to="/travels/new" className="main-button">
+              <h1>Create new travel</h1>
+
+            </Link>}{ Auth.isAuthenticated() && <Link to="/travels/form" className="main-button">
+            </Link>}
           </div>
+
           {this.state.travels.map(travel => {
             return(
-              <div key={travel.id} >
-                <Link to={`/travels/${travel.id}`}>
-                  <h1>{travel.country.name}</h1>
-                  <img src={travel.country.image} />
-                </Link>
-              </div>
+              <Card key={travel.id} image={travel.country.image} name={travel.country.name} url={`/travels/${travel.id}`} />
             );
           })}
         </div>

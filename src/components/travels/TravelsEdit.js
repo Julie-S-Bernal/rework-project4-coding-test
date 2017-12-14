@@ -25,7 +25,8 @@ class TravelsEdit extends React.Component {
       extra: 0,
       foodCost: 0,
       transportation: 0
-    }
+    },
+    errors: {}
   }
 
   componentDidMount() {
@@ -41,7 +42,8 @@ class TravelsEdit extends React.Component {
       value = countryList.find(country => country.name === value);
     }
     const travel = Object.assign({}, this.state.travel, { [name]: value });
-    this.setState({ travel });
+    const errors = Object.assign({}, this.state.errors, { [name]: '' });
+    this.setState({ travel, errors });
   }
 
   handleStartDateChange = (selectedDate) => {
@@ -81,6 +83,7 @@ class TravelsEdit extends React.Component {
         handleChange={this.handleChange}
         handleStartDateChange={ this.handleStartDateChange }
         handleEndDateChange={ this.handleEndDateChange}
+        errors={this.state.errors}
       />
     );
   }

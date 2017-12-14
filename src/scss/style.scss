@@ -1,6 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Righteous|Roboto:100,300,400,500');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
 
 svg{
   width: 20vw;
   height: 20vh;
+}
+
+div.row{
+  background-color: #311B92;
+}
+
+h3{font-family: 'Ubuntu', sans-serif;
+font-size: 20px
 }

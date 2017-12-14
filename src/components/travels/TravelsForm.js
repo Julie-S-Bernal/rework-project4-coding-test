@@ -11,26 +11,19 @@ import {ArrowBack, ArrowForward}  from 'material-ui-icons';
 import BackButton from '../utility/BackButton';
 
 
-const TravelsFormTrip = ({
+
+const TravelsForm = ({
   handleChange,
   handleSubmit,
   handleStartDateChange,
   handleEndDateChange,
-  travel
+  travel,
+  errors
 }) => {
+  const formInvalid = Object.keys(errors).some(key => errors[key]);
+
   return (
-    <form onSubmit={handleSubmit}>
-      {/* <div className="form-group">
-        <TextField
-          type="text"
-          label="Budget"
-          name="budget"
-          placeholder="budget"
-          onChange={handleChange}
-          value={travel.budget}
-          className="form-control"
-        /> */}
-      {/* </div> */}
+    <form onSubmit={handleSubmit} noValidate>
       <div className="form-group">
         <DatePicker
           onChange={handleStartDateChange}
@@ -38,7 +31,9 @@ const TravelsFormTrip = ({
           returnMoment
           leftArrowIcon={<ArrowBack />}
           rightArrowIcon={<ArrowForward />}
+
         />
+        {errors.name && <small>{errors.name}</small>}
       </div>
       <div className="form-group">
         <DatePicker
@@ -47,17 +42,11 @@ const TravelsFormTrip = ({
           returnMoment
           leftArrowIcon={<ArrowBack />}
           rightArrowIcon={<ArrowForward />}
+          minDate={travel.startTravelDate}
         />
+        {errors.name && <small>{errors.name}</small>}
       </div>
       <div className="form-group">
-        {/* <TextField
-          type="text"
-          name="country"
-          placeholder="Country"
-          onChange={handleChange}
-          value={travel.country}
-          className="form-control"
-        /> */}
         <FormControl>
           <InputLabel htmlFor="country-name-native">Country</InputLabel>
           <Select
@@ -69,6 +58,7 @@ const TravelsFormTrip = ({
             { countryList.map(cur => <option  key={cur.image} value={cur.name}>{cur.name}</option>) }
           </Select>
         </FormControl>
+        {errors.name && <small>{errors.name}</small>}
       </div>
       <div className="form-group">
         <FormControl>
@@ -82,6 +72,7 @@ const TravelsFormTrip = ({
             { currencyList.map(cur => <option  key={cur.code} value={cur.code}>{cur.name}</option>) }
           </Select>
         </FormControl>
+        {errors.name && <small>{errors.name}</small>}
       </div>
       <div className="form-group">
         <TextField
@@ -92,6 +83,7 @@ const TravelsFormTrip = ({
           value={travel.hotelCost}
           className="form-control"
         />
+        {errors.name && <small>{errors.name}</small>}
       </div>
       <div className="form-group">
         <TextField
@@ -102,6 +94,7 @@ const TravelsFormTrip = ({
           value={travel.foodCost}
           className="form-control"
         />
+        {errors.name && <small>{errors.name}</small>}
       </div>
       <div className="form-group">
         <TextField
@@ -112,6 +105,7 @@ const TravelsFormTrip = ({
           value={travel.extra}
           className="form-control"
         />
+        {errors.name && <small>{errors.name}</small>}
       </div>
       <div className="form-group">
         <TextField
@@ -122,8 +116,10 @@ const TravelsFormTrip = ({
           value={travel.travelCost}
           className="form-control"
         />
+        {errors.name && <small>{errors.name}</small>}
       </div>
       <div className="form-group">
+
         <TextField
           label="Transportation Cost"
           name="transportation"
@@ -132,9 +128,12 @@ const TravelsFormTrip = ({
           value={travel.transportation}
           className="form-control"
         />
+
+
+        {errors.name && <small>{errors.name}</small>}
       </div>
 
-      <Button type="submit" className="btn btn-primary">Submit</Button>
+      <Button  disabled= {formInvalid} type="submit" className="btn btn-primary">Submit</Button>
       <BackButton />
     </form>
 
@@ -142,4 +141,4 @@ const TravelsFormTrip = ({
   );
 };
 
-export default TravelsFormTrip;
+export default TravelsForm;

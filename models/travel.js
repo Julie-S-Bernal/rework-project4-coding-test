@@ -8,14 +8,14 @@ const travelSchema = mongoose.Schema({
     name: String,
     image: String
   },
-  currency: { type: String},
-  hotelCost: { type: Number },
-  foodCost: { type: Number},
+  currency: { type: String, required: 'Please provide a currency type'},
+  hotelCost: { type: Number, required: 'Please provide hotel price' },
+  foodCost: { type: Number, required: 'Please provide budget for food cost'},
   foodCostValues: {type: Array, 'default': []},
-  extra: { type: Number},
+  extra: { type: Number, required: 'Please provide budget for extra cost'},
   extraCostValues: {type: Array, 'default': []},
-  travelCost: {type: Number},
-  transportation: { type: Number},
+  travelCost: {type: Number, required: 'Please provide your budget for taxi,bus,train fare'},
+  transportation: { type: Number, required: 'Please provide your plane fare'},
   transportationCostValues: {type: Array, 'default': []},
   createdBy: { type: mongoose.Schema.ObjectId, ref: 'User' }
 }, {
