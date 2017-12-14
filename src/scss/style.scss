@@ -2,15 +2,53 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
 
+
 svg{
   width: 20vw;
   height: 20vh;
+  padding :-20px;
 }
 
-div.row{
-  background-color: #311B92;
-}
+
 
 h3{font-family: 'Ubuntu', sans-serif;
-font-size: 20px
+font-size: 1.5em;
+font-weight: 1000;
+text-transform: uppercase;
+color:#311B92;
+
+}
+
+h4 {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1em;
+
+}
+
+input {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1em;
+}
+
+label {
+font-family: 'Ubuntu', sans-serif;
+font-size: 2em;
+}
+
+.merde {
+  min-height: 250px;
+}
+
+span {
+   font-size: 1.2em;
+  font-family: 'Ubuntu', sans-serif;
+  color:#311B92;
+
+}
+
+h2 {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 3em;
+  color: grey;
+
 }

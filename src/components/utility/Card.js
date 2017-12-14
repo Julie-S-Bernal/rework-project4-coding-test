@@ -13,13 +13,15 @@ const styles = {
   },
   media: {
     height: 200
-  }
+  },
+  background: {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #3F51B5 90%)'}
 };
 
 function SimpleMediaCard(props) {
   const { classes, image, name, url } = props;
   return (
-    <div>
+    <div className={classes.background}>
       <Grid container spacing={24}>
         <Grid item xs={12}>
       <Card className={classes.card}>

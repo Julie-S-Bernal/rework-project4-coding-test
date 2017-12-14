@@ -3,6 +3,7 @@ import Axios    from 'axios';
 import Auth from '../../lib/Auth';
 import moment from 'moment';
 import {VictoryChart, VictoryBar, VictoryTheme, VictoryPie} from 'victory';
+
 import CostsForm from './CostsForm';
 import LiveRates from './LiveRates';
 // import Grid from './ShowLayout'
@@ -22,6 +23,12 @@ const styles = theme => ({
     padding: 16,
     textAlign: 'center',
     color: theme.palette.text.secondary
+
+  },
+  button: {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    borderRadius: 3,
+    color: 'white'
   }
 });
 
@@ -140,7 +147,7 @@ class TravelsShow extends React.Component {
       style={{ border: { stroke: 'black' }, labels: {fontSize: 10 } }}
     >
       <VictoryBar
-        style={{ data: { fill: '#FF9800' },labels: {fontSize: 10 } }}
+        style={{ data: { fill: '#FF8E53' },labels: {fontSize: 10 } }}
         data={sampleData}
 
         x="quarter"
@@ -149,7 +156,7 @@ class TravelsShow extends React.Component {
     </VictoryChart>;
 
     const chart2 = <VictoryPie
-      colorScale={['#FFA000','#42A5F5', '#D81B60', '#00BCD4', '#0D47A1'  ]}
+      colorScale={['#FF8E53','#42A5F5', '#FE6B8B', '#00BCD4', '#0D47A1'  ]}
 
       data={[
         { x: 'food cost', y: parseInt(this.state.travel.foodCost), label: `Food ${this.state.travel.foodCost}` },
@@ -179,9 +186,9 @@ class TravelsShow extends React.Component {
     const startDate = <h4>Start date: { moment(this.state.travel.startTravelDate).format('YYYY MM DD') }</h4>;
     const endDate = <h4>End date: { moment(this.state.travel.endTravelDate).format('YYYY MM DD') }</h4>;
     // const data =
-    const diffFood = <h4> Food spending difference: { parseFloat((avg - this.state.travel.foodCostValues[0] ).toFixed(2)) }</h4>;
-    const diffExtra = <h4> Extra spending difference: {parseFloat((avgExtra - this.state.travel.extraCostValues[0]).toFixed(2)) }</h4>;
-    const diffBus = <h4> Transportation difference: {parseFloat((avgTrans  - this.state.travel.transportationCostValues[0]).toFixed(2)) }</h4>;
+    const diffFood = <h4> Food budget difference: { parseFloat((avg - this.state.travel.foodCostValues[0] ).toFixed(2)) }</h4>;
+    const diffExtra = <h4> Extra budget difference: {parseFloat((avgExtra - this.state.travel.extraCostValues[0]).toFixed(2)) }</h4>;
+    const diffBus = <h4> Taxi,bus... budget difference: {parseFloat((avgTrans  - this.state.travel.transportationCostValues[0]).toFixed(2)) }</h4>;
     const form = <CostsForm
       travel={this.state.travel}
       handleChange={this.handleChange}
@@ -201,11 +208,11 @@ class TravelsShow extends React.Component {
       <p>LOADING....</p>
       :
       [
-        <h4 key={1}>total budget without exchanged rate:{ this.state.homeBudget } {this.state.user.homeCurrency}</h4>,
-        <h4 key={2}>total budget multiplied by exchanged rate:{ parseFloat((this.state.totBudgetWithRate).toFixed(2)) } {this.state.travel.currency}</h4>,
-        <h4 key={3}>length of travel: {this.state.travelLength}</h4>,
-        <h4 key={4}>per day budget home {this.state.homeBudget / this.state.travelLength } {this.state.user.homeCurrency}</h4>,
-        <h4 key={5}>per day budget exchanged { parseFloat((this.state.totBudgetWithRate / this.state.travelLength).toFixed(2)) } {this.state.travel.currency}</h4>
+        <h4 key={1}>Budget: { this.state.homeBudget } {this.state.user.homeCurrency}</h4>,
+        <h4 key={2}>Exchanged budget:{ parseFloat((this.state.totBudgetWithRate).toFixed(2)) } {this.state.travel.currency}</h4>,
+        <h4 key={3}>Length of travel: {this.state.travelLength}</h4>,
+        <h4 key={4}> Dailybudget {this.state.homeBudget / this.state.travelLength } {this.state.user.homeCurrency}</h4>,
+        <h4 key={5}> Exchanged budget { parseFloat((this.state.totBudgetWithRate / this.state.travelLength).toFixed(2)) } {this.state.travel.currency}</h4>
       ];
 
     return(

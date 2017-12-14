@@ -2,7 +2,11 @@ import React     from 'react';
 import LoginForm from './LoginForm';
 import Axios     from 'axios';
 
+
 import Auth from '../../lib/Auth';
+// import mainpageimage from '../image/mainpageimage.png';
+//
+
 
 class Login extends React.Component {
   state = {
@@ -30,12 +34,14 @@ class Login extends React.Component {
   }
 
   render() {
+
+
     return (
       <LoginForm
-        user={this.state.user}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-      />
+      user={this.state.user}
+      handleChange={this.handleChange}
+      handleSubmit={this.handleSubmit}
+  />
     );
   }
 }

@@ -3,7 +3,16 @@ import Axios    from 'axios';
 import { Link } from 'react-router-dom';
 import Card from '../utility/Card';
 import Auth from '../../lib/Auth';
+import Button from 'material-ui/Button';
 
+const classes = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    borderRadius: 3,
+    color: 'white'
+  }
+});
 
 class TravelsIndex extends React.Component {
   state = {
@@ -26,11 +35,12 @@ class TravelsIndex extends React.Component {
     return (
       <div>
         <div className="row">
-          <h1> WELCOME BACK</h1>
 
           <div className="page-banner col-md-12">
             { Auth.isAuthenticated() && <Link to="/travels/new" className="main-button">
-              <h1>Create new travel</h1>
+              <Button raised className={classes.button}>
+                Create new travel
+              </Button>
 
             </Link>}{ Auth.isAuthenticated() && <Link to="/travels/form" className="main-button">
             </Link>}

@@ -6,9 +6,10 @@ import Routes from './components/utility/Routes';
 import Navbar from './components/utility/Navbar';
 
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import deepPurple from 'material-ui/colors/deepPurple';
+import orange from 'material-ui/colors/orange';
 import green from 'material-ui/colors/green';
 import red from 'material-ui/colors/red';
+import deepPurple from 'material-ui/colors/deepPurple';
 // import Button from 'material-ui/Button';
 import './scss/style.scss';
 
@@ -16,7 +17,7 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       ...deepPurple,
-          A700: '#6200EA'
+      A400: '#311B92'
     },// Purple and green play nicely together.
     secondary: {
       ...green,
