@@ -54,29 +54,24 @@ h2 {
 
 }
 
-div.loginBackground {
-  background-image: url("../image/mainpageimage.png");
-  height: 50vh;
-  width: auto;
-  background-position: center;
- background-repeat: no-repeat;
- background-size: cover;
- margin: 0 auto;
 
-}
 
 .new-travel-button {
   margin-top: 20px;
+  background-color: white;
 }
 
-div.registerBackground {
-  background-image: url("../image/mainpageimage.png");
-  height: 50vh;
-  width: auto;
-  background-position: center;
- background-repeat: no-repeat;
- background-size: cover;
- margin: 0 auto;
+
+
+.loginForm{
+  z-index: 2;
+ background-image: url("../image/mainpageimage.png");
+ height: 90vh;
+   width: auto;
+   background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0 auto;
 
 }
  html.gr__localhost{

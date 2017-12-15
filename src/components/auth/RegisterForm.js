@@ -12,7 +12,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
   return (
 
 
-    <form onSubmit={handleSubmit}>
+    <form className ="loginForm"  onSubmit={handleSubmit}>
       <div className="form-group">
         <TextField
           type="text"

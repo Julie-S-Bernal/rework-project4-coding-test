@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
-// import purple from 'material-ui/colors/green';
+const second = deepPurple['900'];
+
+import deepPurple from 'material-ui/colors/deepPurple';
 
 const styles = theme => ({
   root: {
@@ -22,7 +24,7 @@ const styles = theme => ({
     color: 'white'
   },
   background: {
-    background: 'linear-gradient(30deg, purple 40%, #FF8E53 60%)'
+    background: 'linear-gradient( 0deg, #311B92 40%, #FF8E53 60%)'
   }
 });
 

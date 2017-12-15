@@ -2,24 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './components/utility/Routes';
-
 import Navbar from './components/utility/Navbar';
-
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-// import orange from 'material-ui/colors/orange';
-// import green from 'material-ui/colors/green';
-// import red from 'material-ui/colors/red';
-// import grey from 'material-ui/colors/grey'
-// import deepPurple from 'material-ui/colors/deepPurple';
-
-
-import { grey, red, green } from 'material-ui/colors';
-
-
-// import Button from 'material-ui/Button';
+import { grey, red, deepPurple } from 'material-ui/colors';
 import './scss/style.scss';
 
 const accent = grey['50']; // ---> #fafafa
+const second = deepPurple['900'];
 
 const theme = createMuiTheme({
   palette: {
@@ -28,8 +17,8 @@ const theme = createMuiTheme({
       500: accent
     },// Purple and green play nicely together.
     secondary: {
-      ...green,
-      A400: '#00e677'
+      ...deepPurple,
+      900: second
     },
     error: red
   }

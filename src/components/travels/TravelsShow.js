@@ -131,13 +131,14 @@ class TravelsShow extends React.Component {
     var transSum = this.state.travel.transportationCostValues.reduce((a, b) => a + b);
     var avgTrans = transSum / this.state.travel.transportationCostValues.length;
 
-    //
+
+
     const sampleData = [
-      { quarter: 'AF', earning: avg, fill:"#FE6B8B" },
+      { quarter: 'AF', earning: avg, fill: "#FE6B8B" },
       { quarter: 'IF', earning: this.state.travel.foodCostValues[0] },
-      { quarter: 'AEC', earning: avgExtra , fill:"#FE6B8B" },
+      { quarter: 'AEC', earning: avgExtra , fill: "#FE6B8B" },
       { quarter: 'IC', earning: this.state.travel.extraCostValues[0] },
-      { quarter: 'ATF', earning: avgTrans, fill:"#FE6B8B"  },
+      { quarter: 'ATF', earning: avgTrans, fill: "#FE6B8B"  },
       { quarter: 'ITFC', earning: this.state.travel.transportationCostValues[0] }
     ];
 
@@ -154,6 +155,7 @@ class TravelsShow extends React.Component {
         x="quarter"
         y="earning"
       />
+
     </VictoryChart>;
 
 
@@ -185,12 +187,12 @@ class TravelsShow extends React.Component {
       ]}
     />;
     const countryName = <h3>{ this.state.travel.country.name}</h3>;
-    const startDate = <h4>Start date: { moment(this.state.travel.startTravelDate).format('YYYY MM DD') }</h4>;
-    const endDate = <h4>End date: { moment(this.state.travel.endTravelDate).format('YYYY MM DD') }</h4>;
+    const startDate = <h4>Start Date: { moment(this.state.travel.startTravelDate).format('YYYY MM DD') }</h4>;
+    const endDate = <h4>End Date: { moment(this.state.travel.endTravelDate).format('YYYY MM DD') }</h4>;
     // const data =
-    const diffFood = <h4> Food budget difference: { parseFloat((avg - this.state.travel.foodCostValues[0] ).toFixed(2)) }</h4>;
-    const diffExtra = <h4> Extra budget difference: {parseFloat((avgExtra - this.state.travel.extraCostValues[0]).toFixed(2)) }</h4>;
-    const diffBus = <h4> Taxi,bus... budget difference: {parseFloat((avgTrans  - this.state.travel.transportationCostValues[0]).toFixed(2)) }</h4>;
+    const diffFood = <h4> Food Dudget Difference: { parseFloat((avg - this.state.travel.foodCostValues[0] ).toFixed(2)) }</h4>;
+    const diffExtra = <h4> Extra Dudget Difference: {parseFloat((avgExtra - this.state.travel.extraCostValues[0]).toFixed(2)) }</h4>;
+    const diffBus = <h4> Taxi,Bus... Dudget difference: {parseFloat((avgTrans  - this.state.travel.transportationCostValues[0]).toFixed(2)) }</h4>;
     const form = <CostsForm
       travel={this.state.travel}
       handleChange={this.handleChange}
@@ -211,10 +213,10 @@ class TravelsShow extends React.Component {
       :
       [
         <h4 key={1}>Budget: { this.state.homeBudget } {this.state.user.homeCurrency}</h4>,
-        <h4 key={2}>Exchanged budget:{ parseFloat((this.state.totBudgetWithRate).toFixed(2)) } {this.state.travel.currency}</h4>,
-        <h4 key={3}>Length of travel: {this.state.travelLength}</h4>,
+        <h4 key={2}>Exchanged Dudget:{ parseFloat((this.state.totBudgetWithRate).toFixed(2)) } {this.state.travel.currency}</h4>,
+        <h4 key={3}>Length of Travel: {this.state.travelLength}</h4>,
         <h4 key={4}> Dailybudget {this.state.homeBudget / this.state.travelLength } {this.state.user.homeCurrency}</h4>,
-        <h4 key={5}> Exchanged budget { parseFloat((this.state.totBudgetWithRate / this.state.travelLength).toFixed(2)) } {this.state.travel.currency}</h4>
+        <h4 key={5}> Exchanged Daily Budget { parseFloat((this.state.totBudgetWithRate / this.state.travelLength).toFixed(2)) } {this.state.travel.currency}</h4>
       ];
 
     return(
