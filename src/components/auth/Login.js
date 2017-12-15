@@ -37,11 +37,15 @@ class Login extends React.Component {
 
 
     return (
+      <div>
       <LoginForm
       user={this.state.user}
       handleChange={this.handleChange}
       handleSubmit={this.handleSubmit}
-  />
+      />
+    <div className="loginBackground">
+      </div>
+    </div>
     );
   }
 }

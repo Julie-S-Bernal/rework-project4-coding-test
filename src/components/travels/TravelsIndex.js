@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Card from '../utility/Card';
 import Auth from '../../lib/Auth';
 import Button from 'material-ui/Button';
+import Grid from 'material-ui/Grid';
 
 const classes = theme => ({
   button: {
@@ -34,24 +35,26 @@ class TravelsIndex extends React.Component {
 
     return (
       <div>
-        <div className="row">
+        <div className="page-banner">
+          { Auth.isAuthenticated() && <Link to="/travels/new" className="main-button">
+            <Button raised className={classes.button, 'new-travel-button'}>
+              Create new travel
+            </Button>
 
-          <div className="page-banner col-md-12">
-            { Auth.isAuthenticated() && <Link to="/travels/new" className="main-button">
-              <Button raised className={classes.button}>
-                Create new travel
-              </Button>
+          </Link>}{ Auth.isAuthenticated() && <Link to="/travels/form" className="main-button">
+          </Link>}
+        </div>
 
-            </Link>}{ Auth.isAuthenticated() && <Link to="/travels/form" className="main-button">
-            </Link>}
-          </div>
-
+        <Grid container spacing={24}>
           {this.state.travels.map(travel => {
             return(
-              <Card key={travel.id} image={travel.country.image} name={travel.country.name} url={`/travels/${travel.id}`} />
+              <Grid key={travel.id} item xs={12} sm={6}>
+                <Card image={travel.country.image} name={travel.country.name} url={`/travels/${travel.id}`} />
+              </Grid>
             );
           })}
-        </div>
+        </Grid>
+
       </div>
     );
   }

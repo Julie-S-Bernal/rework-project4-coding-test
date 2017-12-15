@@ -6,18 +6,26 @@ import Routes from './components/utility/Routes';
 import Navbar from './components/utility/Navbar';
 
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-import orange from 'material-ui/colors/orange';
-import green from 'material-ui/colors/green';
-import red from 'material-ui/colors/red';
-import deepPurple from 'material-ui/colors/deepPurple';
+// import orange from 'material-ui/colors/orange';
+// import green from 'material-ui/colors/green';
+// import red from 'material-ui/colors/red';
+// import grey from 'material-ui/colors/grey'
+// import deepPurple from 'material-ui/colors/deepPurple';
+
+
+import { grey, red, green } from 'material-ui/colors';
+
+
 // import Button from 'material-ui/Button';
 import './scss/style.scss';
+
+const accent = grey['50']; // ---> #fafafa
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      ...deepPurple,
-      A400: '#311B92'
+      ...grey,
+      500: accent
     },// Purple and green play nicely together.
     secondary: {
       ...green,

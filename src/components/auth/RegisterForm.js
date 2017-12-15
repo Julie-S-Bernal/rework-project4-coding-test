@@ -128,7 +128,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
         />
       </div>
 
-      <Button type="submit" className="btn btn-primary">Register</Button>
+      <Button type="submit" className="btn btn-primary buttonColor">Register</Button>
     </form>
   );
 

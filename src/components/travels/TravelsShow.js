@@ -133,18 +133,19 @@ class TravelsShow extends React.Component {
 
     //
     const sampleData = [
-      { quarter: 'Average Food Cost', earning: avg },
-      { quarter: 'Initial Food Cost', earning: this.state.travel.foodCostValues[0] },
-      { quarter: 'Average Extra Cost', earning: avgExtra },
-      { quarter: 'Initial Extra cost', earning: this.state.travel.extraCostValues[0] },
-      { quarter: 'Average Transportation Food Cost', earning: avgTrans },
-      { quarter: 'Initial Transportation Food Cost', earning: this.state.travel.transportationCostValues[0] }
+      { quarter: 'AF', earning: avg, fill:"#FE6B8B" },
+      { quarter: 'IF', earning: this.state.travel.foodCostValues[0] },
+      { quarter: 'AEC', earning: avgExtra , fill:"#FE6B8B" },
+      { quarter: 'IC', earning: this.state.travel.extraCostValues[0] },
+      { quarter: 'ATF', earning: avgTrans, fill:"#FE6B8B"  },
+      { quarter: 'ITFC', earning: this.state.travel.transportationCostValues[0] }
     ];
 
     const chart1 = <VictoryChart
-      theme={VictoryTheme.material}
+
       domainPadding={20}
       style={{ border: { stroke: 'black' }, labels: {fontSize: 10 } }}
+      theme={VictoryTheme.material}
     >
       <VictoryBar
         style={{ data: { fill: '#FF8E53' },labels: {fontSize: 10 } }}
@@ -154,6 +155,7 @@ class TravelsShow extends React.Component {
         y="earning"
       />
     </VictoryChart>;
+
 
     const chart2 = <VictoryPie
       colorScale={['#FF8E53','#42A5F5', '#FE6B8B', '#00BCD4', '#0D47A1'  ]}

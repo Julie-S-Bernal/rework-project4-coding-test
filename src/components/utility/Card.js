@@ -15,34 +15,32 @@ const styles = {
     height: 200
   },
   background: {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #3F51B5 90%)'}
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'}
 };
 
 function SimpleMediaCard(props) {
   const { classes, image, name, url } = props;
   return (
     <div className={classes.background}>
-      <Grid container spacing={24}>
-        <Grid item xs={12}>
-      <Card className={classes.card}>
-        <CardMedia
-          className={classes.media}
-          image={ image }
-          title={ name }
-        />
-        <CardContent>
-          <Typography type="headline" component="h2">
-            { name }
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button href={ url } dense color="primary">
-            See your stats
-          </Button>
-        </CardActions>
-      </Card>
-    </Grid>
-  </Grid>
+
+
+        <Card className={classes.card}>
+          <CardMedia
+            className={classes.media}
+            image={ image }
+            title={ name }
+          />
+          <CardContent>
+            <Typography type="headline" component="h2">
+              { name }
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button href={ url } dense color="primary">
+              See your stats
+            </Button>
+          </CardActions>
+        </Card>
     </div>
   );
 }

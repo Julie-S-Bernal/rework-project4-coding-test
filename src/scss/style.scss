@@ -15,7 +15,7 @@ h3{font-family: 'Ubuntu', sans-serif;
 font-size: 1.5em;
 font-weight: 1000;
 text-transform: uppercase;
-color:#311B92;
+color: Grey;
 
 }
 
@@ -44,11 +44,54 @@ span {
   font-family: 'Ubuntu', sans-serif;
   color:#311B92;
 
+
 }
 
 h2 {
   font-family: 'Ubuntu', sans-serif;
   font-size: 3em;
-  color: grey;
+  color: Grey;
 
 }
+
+div.loginBackground {
+  background-image: url("../image/mainpageimage.png");
+  height: 50vh;
+  width: auto;
+  background-position: center;
+ background-repeat: no-repeat;
+ background-size: cover;
+ margin: 0 auto;
+
+}
+
+.new-travel-button {
+  margin-top: 20px;
+}
+
+div.registerBackground {
+  background-image: url("../image/mainpageimage.png");
+  height: 50vh;
+  width: auto;
+  background-position: center;
+ background-repeat: no-repeat;
+ background-size: cover;
+ margin: 0 auto;
+
+}
+ html.gr__localhost{
+   background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+ }
+
+ button {
+   background: white;
+ }
+
+ .primary-button {
+    background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+    color: white;
+ }
+ .paper {
+   border-radius: 20px;
+
+ }

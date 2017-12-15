@@ -37,6 +37,7 @@ const Navbar = ({ history }) => {
           Logout
         </Button>
       }
+      {' '}
     </AppBar>
   );
 };
