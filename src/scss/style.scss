@@ -1,92 +1,66 @@
 @import url('https://fonts.googleapis.com/css?family=Righteous|Roboto:100,300,400,500');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
-
-
-
-svg{
+svg {
   width: 20vw;
   height: 20vh;
-  padding :-20px;
+  padding: -20px;
 }
-
-
-
-h3{font-family: 'Ubuntu', sans-serif;
-font-size: 1.5em;
-font-weight: 1000;
-text-transform: uppercase;
-color: Grey;
-
+h3 {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1.5em;
+  font-weight: 1000;
+  text-transform: uppercase;
+  color: Grey;
 }
-
 h4 {
   font-family: 'Ubuntu', sans-serif;
   font-size: 1em;
-
 }
-
 input {
   font-family: 'Ubuntu', sans-serif;
   font-size: 1em;
 }
-
 label {
-font-family: 'Ubuntu', sans-serif;
-font-size: 2em;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 2em;
 }
-
 .merde {
   min-height: 250px;
 }
-
 span {
-   font-size: 1.2em;
+  font-size: 1.2em;
   font-family: 'Ubuntu', sans-serif;
-  color:#311B92;
-
-
+  color: #311B92;
 }
-
 h2 {
   font-family: 'Ubuntu', sans-serif;
   font-size: 3em;
   color: Grey;
-
 }
-
-
-
 .new-travel-button {
   margin-top: 20px;
   background-color: white;
 }
-
-
-
-.loginForm{
+.loginForm {
   z-index: 2;
- background-image: url("../image/mainpageimage.png");
- height: 90vh;
-   width: auto;
-   background-position: center;
+  background-image: url("../image/mainpageimage.png");
+  height: 90vh;
+  width: auto;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0 auto;
-
 }
- html.gr__localhost{
-   background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
- }
-
- button {
-   background: white;
- }
-
- .primary-button {
-    background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
-    color: white;
- }
- .paper {
-   border-radius: 20px;
-
- }
+html.gr__localhost {
+  background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+}
+button {
+  background: white;
+}
+.primary-button {
+  background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+  color: white;
+}
+.paper {
+  border-radius: 20px;
+}
