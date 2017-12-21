@@ -51,9 +51,10 @@ h2 {
   background-size: cover;
   margin: 0 auto;
 }
-html.gr__localhost {
-  // background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
-  background: red;
+// html.gr__localhost {
+html {
+  background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+  // background: red;
 }
 button {
   background: white;
