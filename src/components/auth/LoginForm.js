@@ -26,6 +26,7 @@ const LoginForm = ({ handleChange, handleSubmit, user }) => {
           className="form-control"
         />
       </div>
+      <Button type="submit" className="btn btn-primary">Reset Password</Button>
       <Button type="submit" className="btn btn-primary">Login</Button>
     </form>
   );

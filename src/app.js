@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './components/utility/Routes';
-import Navbar from './components/utility/Navbar';
+// import Navbar from './components/utility/Navbar';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import { grey, red, deepPurple } from 'material-ui/colors';
 import './scss/style.scss';
@@ -31,7 +31,6 @@ class App extends React.Component {
       <MuiThemeProvider theme={theme}>
         <Router>
           <div className="container">
-            <Navbar />
             <main>
               <Routes />
             </main>

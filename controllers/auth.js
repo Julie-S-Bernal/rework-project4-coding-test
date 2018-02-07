@@ -28,7 +28,15 @@ function login(req, res, next) {
     .catch(next);
 }
 
+function retrieve(req, res, next) {
+  User
+  .get('/forgotpassword', function(req, res)
+  res.send
+);
+}
+
 module.exports = {
   register,
-  login
+  login,
+  retrieve
 };

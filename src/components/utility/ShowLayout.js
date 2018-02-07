@@ -48,13 +48,13 @@ function FullWidthGrid(props) {
           <Paper className={classes.paper}>{chart2}</Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Paper className={`${classes.paper}  merde`}>{totals}</Paper>
+          <Paper className={`${classes.paper}  papers`}>{totals}</Paper>
         </Grid>
         <Grid item xs={6} sm={3}>
-          <Paper className={`${classes.paper} merde`}>{startDate}{endDate}</Paper>
+          <Paper className={`${classes.paper} papers`}>{startDate}{endDate}</Paper>
         </Grid>
         <Grid item xs={6} sm={3}>
-          <Paper className={`${classes.paper} merde`}>{diffFood}{diffExtra}{diffBus}</Paper>
+          <Paper className={`${classes.paper} papers`}>{diffFood}{diffExtra}{diffBus}</Paper>
         </Grid>
 
         <Grid item xs={12}>
