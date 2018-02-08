@@ -101,13 +101,13 @@ button {
   font-size: 14px ;
   padding-top: 3vh;
   padding-bottom: 3vh;
-  padding-left: 20.8vh;
 
 }
 .form-control{
   background-color: white;
   border-radius: 5px;
   width: 30vw;
+  margin-left: -20px
 
 }
 .login-button{
@@ -130,7 +130,6 @@ button {
 font-size: 14px;
 margin-top: 5vh;
 color: #66CDAA;
-border-bottom: 1px solid;
 text-decoration: none !important;
 text-align:center;
 }
@@ -140,6 +139,8 @@ text-align:center;
 }
 .forgot-wrap{
 padding-top: 2vh;
+text-align: left;
+margin-left: 15vw;
 }
 .wrapper {
   //adjust once
