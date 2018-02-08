@@ -19,6 +19,10 @@ h4 {
 input {
   font-family: 'Ubuntu', sans-serif;
   font-size: 1em;
+  background-color: white;
+  color: white;
+  margin-left: 3vh!important ;
+
 }
 label {
   font-family: 'Ubuntu', sans-serif;
@@ -32,6 +36,7 @@ span {
   font-family: 'Ubuntu', sans-serif;
   color: #311B92;
 }
+
 h2 {
   font-family: 'Ubuntu', sans-serif;
   font-size: 3em;
@@ -51,19 +56,96 @@ h2 {
   background-size: cover;
   margin: 0 auto;
 }
-// html.gr__localhost {
+
 html {
-  background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
-  // background: red;
+  background: linear-gradient(45deg, #002635 30%, #5DBB9B 90%);
+
 }
 button {
   background: white;
 }
 .primary-button {
-  // background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
+
   background: green;
   color: white;
 }
 .paper {
   border-radius: 20px;
+}
+// I added a background container here to replicate the example you gave me.
+// The forms of the style in material-ui-next is quite preset so I need to overide it to style it as the example.
+//
+.form-container{
+  height: 50vh;
+  width: 60vw;
+  background-image: url("../image/pattern2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  // I did not use this to avoid to use too much override
+  // text-align: center;
+  margin: 0 auto;
+  font-family: 'Ubuntu', sans-serif;
+  margin-top: 30vh;
+
+}
+
+.form-group{
+  margin-top: 2vh ;
+  text-align: center;
+}
+
+.forgot{
+  color: white;
+  text-decoration: none;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 14px ;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  padding-left: 20.8vh;
+
+}
+.form-control{
+  background-color: white;
+  border-radius: 5px;
+  width: 30vw;
+
+}
+.login-button{
+  text-align: center;
+}
+//Material-ui-next allows you to create theme for all your button but to do so it adds classes behind so you need to add them back in the HTML in order to target the right element if you want to override it.
+.login{
+  color:white;
+  text-align:center;
+  background-color: #66CDAA;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  margin-top: 2.5vh;
+  width: 30vw;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.register{
+font-size: 14px;
+margin-top: 5vh;
+color: #66CDAA;
+border-bottom: 1px solid;
+text-decoration: none !important;
+text-align:center;
+}
+
+.register-wrap{
+  text-align: center;
+}
+.forgot-wrap{
+padding-top: 2vh;
+}
+.wrapper {
+  //adjust once
+  padding-top: 6.5vh;
+}
+
+.MuiInput-input-14 {
+padding: 2.5vh 0 2.5vh !important;
 }
