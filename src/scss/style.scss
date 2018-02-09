@@ -26,7 +26,8 @@ input {
 }
 label {
   font-family: 'Ubuntu', sans-serif;
-  font-size: 2em;
+  font-size: 10px;
+  color: white;
 }
 .papers{
   min-height: 250px;
@@ -57,8 +58,19 @@ h2 {
   margin: 0 auto;
 }
 
+.registerForm {
+  z-index: 2;
+  background-image: url("../image/mainpageimage.png");
+  height: 92vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0 auto;
+}
+
 html {
   background: linear-gradient(45deg, #002635 30%, #5DBB9B 90%);
+  background-size: cover;
 
 }
 button {
@@ -87,6 +99,22 @@ button {
   font-family: 'Ubuntu', sans-serif;
   margin-top: 25vh;
 
+}
+// the form is longer on the registration so I had to adjust it. I also got rid of fields that my app was not using.
+.register-container{
+  // height: 90vh;
+  width: 60vw;
+  background-image: url("../image/pattern2.png");
+  // background-repeat: repeat;
+  background-size: cover;
+  margin: 0 auto;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+select#currency-code-native{
+  margin-left:4vh;
+  padding: -10px;
+  color: grey;
 }
 
 .form-group{
@@ -147,6 +175,41 @@ margin-left: 15vw;
   padding-top: 6.5vh;
 }
 
+.form-group.wrapping{
+  margin-top: 7.8vh;
+}
+
+.wrapper-register{
+  //adjust once
+  padding-top: 5vh;
+}
+
 .MuiInput-input-14 {
 padding: 2.5vh 0 2.5vh !important;
+}
+
+.MuiFormLabel-root-26 {
+    padding: -10vh;
+    margin: -10vh;
+    font-size: 0;
+    font-family: "Ubuntu", "Helvetica", "Arial", sans-serif;
+    line-height: 0;
+}
+
+.MuiFormControl-root-1 {
+    border: 0;
+    display: inline-flex;
+    padding: 0;
+    position: relative;
+    min-width: 0;
+    flex-direction: column;
+}
+
+.MuiSelect-root-30 {
+    margin: -0.8vh;
+}
+
+label + .MuiInput-formControl-6 {
+    margin-top: 0 !important;
+    margin-left: 0 !important;
 }

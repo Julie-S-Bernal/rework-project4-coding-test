@@ -14,11 +14,8 @@ class Register extends React.Component {
       email: '',
       password: '',
       homeCountry: '',
-      homeCurrency: '',
-      salary: '',
-      monthlySalary: '2',
-      livingExpensesYear: '',
-      livingExpensesMonth: ''
+      homeCurrency: ''
+
     }
   };
   handleChange = ({ target: { name, value }}) => {

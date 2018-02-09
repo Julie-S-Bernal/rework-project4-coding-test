@@ -12,8 +12,11 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
   return (
 
 
-    <form className ="loginForm"  onSubmit={handleSubmit}>
-      <div className="form-group">
+    <form className ="registerForm"  onSubmit={handleSubmit}>
+
+      <div className="form-group wrapping">
+        <div className="register-container">
+          <div className ="wrapper-register">
         <TextField
           type="text"
           name="name"
@@ -22,7 +25,7 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
           value={user.name}
           className="form-control"
         />
-      </div>
+
       <div className="form-group">
         <TextField
           type="text"
@@ -69,46 +72,6 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
       </div>
       <div className="form-group">
         <TextField
-          type="name"
-          name="salary"
-          placeholder="salary"
-          onChange={handleChange}
-          value={user.salary}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <TextField
-          type="name"
-          name="monthlySalary"
-          placeholder="monthly Salary"
-          onChange={handleChange}
-          value={user.monthlySalary}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <TextField
-          type="name"
-          name="livingExpensesYear"
-          placeholder="Yearly Living Expenses"
-          onChange={handleChange}
-          value={user.livingExpensesYear}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <TextField
-          type="name"
-          name="livingExpensesMonth"
-          placeholder="Monthly Living Expenses "
-          onChange={handleChange}
-          value={user.livingExpensesMonth}
-          className="form-control"
-        />
-      </div>
-      <div className="form-group">
-        <TextField
           type="password"
           name="password"
           placeholder="Password"
@@ -128,7 +91,10 @@ const RegisterForm = ({ handleChange, handleSubmit, user }) => {
         />
       </div>
 
-      <Button type="submit" className="btn btn-primary buttonColor">Register</Button>
+      <Button type="submit" className="btn btn-primary buttonColor"><span className ="login">Register</span></Button>
+    </div>
+    </div>
+    </div>
     </form>
   );
 
