@@ -182,8 +182,9 @@ margin-left: 15vw;
 .wrapper-register{
   //adjust once
   padding-top: 5vh;
+  padding-bottom: 4vh;
 }
-
+// MUi is a class determined by material-ui and I had to do a fewoverride here because I cannot use a regular class to override
 .MuiInput-input-14 {
 padding: 2.5vh 0 2.5vh !important;
 }
