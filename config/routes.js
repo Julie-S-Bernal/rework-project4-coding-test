@@ -23,6 +23,10 @@ router.route('/login')
 // router.route('/users/:id')
 //   .get(secureRoute, users.show);
 
+// router.route('/auth/forgot_password')
+//   .get(userHandlers.render_forgot_password_template)
+//   .post(userHandlers.forgot_password);
+
 router.route('/users/:id')
   .get(users.show);
 
